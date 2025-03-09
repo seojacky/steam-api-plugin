@@ -1,164 +1,118 @@
-<?php
-
-$apikey = '2EF6E52E83E288756136106E81C4B41E';
-
-function getSteamID64($user) {
-	global $apikey;
-
-	if (isset($user) && !empty($user)) {
-			if (isset($user)) {
-				$okay = $user;
-			}
-
-	  	$steamid1 = '/^STEAM_0:([0|1]):([\d]+)$/'; //STEAM_0:1:38052486
-	  	$steamid2 = '/^([\d]+)$/'; //76561198036370701
-	  	$steamid3 = '/^[^-_\d]{1}[-a-zA-Z_\d]+$/'; //Heavenanvil
-	  	$steamid4 = '~^(http[s]?://)?(www\.)?steamcommunity.com/profiles/([^-_]{1}[\d(/)?]+)$~'; //steamcommunity.com/profiles/76561198036370701
-	  	$steamid5 = '~^(http[s]?://)?(www\.)?steamcommunity.com/id/([^-_]{1}[-a-zA-Z_\d(/)?]+)$~'; //steamcommunity.com/id/heavenanvil
-
-	  	//Обращение к api.steampowered.com
-
-	  	if (preg_match($steamid1, $okay, $matches)) //Если данные из Input вида "STEAM_0:1:38052486"
-			{
-				$valid1     = $matches[1];
-				$valid2     = $matches[2];
-		    $realokay   = ($valid2 * 2) + 76561197960265728 + $valid1; //Формула расчета steamID64 из STEAM_0:X:XXXXXXXX
-				$urljson    = file_get_contents("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=$apikey&steamids=$realokay");
-				$data       = (array) json_decode($urljson)->response->players[0];
-		    $profileurl = $data['profileurl']; //Находим profileurl (customurl)
-			}
-			if (preg_match($steamid2, $okay)) {
-				$urljson    = file_get_contents("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=$apikey&steamids=$okay");
-				$data       = (array) json_decode($urljson)->response->players[0];
-		    $profileurl = $data['profileurl']; //Находим profileurl (customurl)
-			}
-	  	if (preg_match($steamid4, $profileurl, $matchespro)) //Если profileurl вида "steamcommunity.com/profiles/76561198036370701", находим "76561198036370701" из ссылки
-			{
-	    	if (substr($matchespro[3], -1) == '/') //Если на конце знак "/"
-					{
-	      		$myurl = substr($matchespro[3], 0, -1); //Убираем его
-				} else {
-					$myurl = $matchespro[3];
-				}
-
-				$slf  = "http://steamcommunity.com/profiles/$myurl/?xml=1";
-				$url  = simplexml_load_file($slf);
-				$link = "http://steamcommunity.com/profiles/$myurl";
-			}
-
-	  	if (preg_match($steamid5, $profileurl, $matchesid)) //Если profileurl вида "steamcommunity.com/id/heavenanvil", находим "heavenanvil" из ссылки
-			{
-	    	if (substr($matchesid[3], -1) == '/') //Если на конце знак "/"
-					{
-	      		$myurl = substr($matchesid[3], 0, -1); //Убираем его
-				} else {
-					$myurl = $matchesid[3];
-				}
-				$slf  = "http://steamcommunity.com/id/$myurl/?xml=1";
-				$url  = simplexml_load_file($slf);
-				$link = "http://steamcommunity.com/id/$myurl";
-			}
-	  	if (preg_match($steamid3, $okay)) //Если Input вида "Heavenanvil"
-			{
-				$slf  = "http://steamcommunity.com/id/$okay/?xml=1";
-				$url  = simplexml_load_file($slf);
-				$link = "http://steamcommunity.com/id/$okay";
-			}
-			if (preg_match($steamid4, $okay)) {
-	    	if (preg_match($steamid4, $okay, $matchespro)) //Если Input вида "steamcommunity.com/profiles/76561198036370701", находим "76561198036370701" из ссылки
-				{
-	      	if (substr($matchespro[3], -1) == '/') //Если на конце знак "/"
-					{
-	        	$myurl = substr($matchespro[3], 0, -1); //Убираем его
-					} else {
-						$myurl = $matchespro[3];
-					}
-
-					$urljson    = file_get_contents("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=$apikey&steamids=$myurl");
-						$data       = (array) json_decode($urljson)->response->players[0];
-		      	$profileurl = $data['profileurl']; //Проверяем, есть ли customurl
-	      		if (preg_match($steamid4, $profileurl, $matchesprox)) //Если profileurl вида "steamcommunity.com/profiles/76561198036370701", находим "76561198036370701" из ссылки
-						{
-	        		if (substr($matchesprox[3], -1) == '/') //Если на конце знак "/"
-							{
-	          			$myurlx = substr($matchesprox[3], 0, -1); //Убираем его
-							} else {
-								$myurlx = $matchesprox[3];
-							}
-
-							$slf  = "http://steamcommunity.com/profiles/$myurlx/?xml=1";
-							$url  = simplexml_load_file($slf);
-							$link = "http://steamcommunity.com/profiles/$myurlx";
-						}
-
-	      		if (preg_match($steamid5, $profileurl, $matchesprox)) //Если profileurl вида "steamcommunity.com/profiles/76561198036370701", находим "76561198036370701" из ссылки
-						{
-	        		if (substr($matchesprox[3], -1) == '/') //Если на конце знак "/"
-							{
-	          			$myurlx = substr($matchesprox[3], 0, -1); //Убираем его
-							} else {
-								$myurlx = $matchesprox[3];
-							}
-							$slf  = "http://steamcommunity.com/id/$myurlx/?xml=1";
-							$url  = simplexml_load_file($slf);
-							$link = "http://steamcommunity.com/id/$myurlx";
-					}
-				}
-			}
-
-	  	if (preg_match($steamid5, $okay, $matchesid)) //Если profileurl вида "steamcommunity.com/id/heavenanvil", находим "heavenanvil" из ссылки
-			{
-	    	if (substr($matchesid[3], -1) == '/') //Если на конце знак "/"
-					{
-	      		$myurl = substr($matchesid[3], 0, -1); //Убираем его
-				} else {
-					$myurl = $matchesid[3];
-				}
-
-				$slf  = "http://steamcommunity.com/id/$myurl/?xml=1";
-				$url  = simplexml_load_file($slf);
-				$link = "http://steamcommunity.com/id/$myurl";
-			}
-
-				$sid64 = $url->steamID64;
-			if (($sid64 - 76561197960265728 - 1) - (($sid64 - 76561197960265728 - 1) / 2) - floor(($sid64 - 76561197960265728 - 1) / 2) == 0) {
-				$ass = 1;
-			} else {
-				$ass = 0;
-			}
-
-		$sid         = $sid64 - 76561197960265728;
-		$myfriend    = @simplexml_load_file($link . "/friends/?xml=1");
-		$linktolvl   = $url->steamID64;
-		$steam_level = @file_get_contents("http://api.steampowered.com/IPlayerService/GetSteamLevel/v1?key=$apikey&steamid=$linktolvl");
-		$datalevel   = json_decode($steam_level)->response->player_level;
-		$need        = $_GET['need'];
-		//Получаем аватарку
-		$id          = $url->steamID64;
-		$myurl       = 'http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=' . $apikey . '&steamids=' . $id;
-		$urljson     = file_get_contents($myurl);
-		$data        = (array) json_decode($urljson)->response->players[0];
-		$request_img = $data['avatar'];
-		// Получаем код страны для флага
-		$data        = (array) json_decode($urljson)->response->players[0];
-		$request_loc = $flag = mb_strtolower($data['loccountrycode']);
-		//Пишем в БД
-		//$result0     = mysqli_query($db, "INSERT INTO `steaminfodb` (request_id,request_cont,datetime,request_img,request_lvl,request_loc) VALUES('$request_id','$userok','$superdate','$request_img','$datalevel','$request_loc')");
-
-	}
-
-	return $url->steamID64;
-}
-
-function getSteamID32($steamID64)  {
-	if (strlen($steamID64) === 17)
-	{
-		$account_id = substr($steamID64, 3) - 61197960265728;
-	}
-	else
-	{
-		$account_id = '765'.($steamID64 + 61197960265728);
-	}
-
-	return $account_id;
-}
+<?php
+/**
+ * Input processing functions for Steam API
+ *
+ * @package SteamAPIPlugin
+ */
+
+/**
+ * Resolves various formats of Steam identifiers to SteamID64
+ *
+ * @param string $user Input from user (can be SteamID, SteamID64, vanity URL, etc.)
+ * @return string|false SteamID64 if successful, false otherwise
+ */
+function getSteamID64($user) {
+    if (empty($user)) {
+        return false;
+    }
+    
+    // Get API key from WordPress options
+    $api_key = steam_api_get_api_key();
+    
+    if (empty($api_key)) {
+        return false;
+    }
+    
+    // Sanitize input
+    $input = trim(sanitize_text_field($user));
+    
+    // Regular expressions for different Steam ID formats
+    $patterns = array(
+        'steamid1' => '/^STEAM_0:([0|1]):([\d]+)$/', // STEAM_0:1:38052486
+        'steamid2' => '/^([\d]{17})$/', // 76561198036370701
+        'vanity'   => '/^[^-_\d]{1}[-a-zA-Z_\d]+$/', // Heavenanvil
+        'profile'  => '~^(?:https?://)?(?:www\.)?steamcommunity\.com/profiles/([^-_]{1}[\d]+)/?$~', // steamcommunity.com/profiles/76561198036370701
+        'id'       => '~^(?:https?://)?(?:www\.)?steamcommunity\.com/id/([^-_]{1}[-a-zA-Z_\d]+)/?$~' // steamcommunity.com/id/heavenanvil
+    );
+    
+    try {
+        // Case 1: Input is a SteamID (STEAM_0:1:38052486)
+        if (preg_match($patterns['steamid1'], $input, $matches)) {
+            $y = (int)$matches[1];
+            $z = (int)$matches[2];
+            $steamid64 = bcadd(bcadd(bcmul($z, '2'), '76561197960265728'), $y);
+            return $steamid64;
+        }
+        
+        // Case 2: Input is already a SteamID64 (76561198036370701)
+        if (preg_match($patterns['steamid2'], $input)) {
+            return $input;
+        }
+        
+        // Case 3: Input is a profile URL (steamcommunity.com/profiles/76561198036370701)
+        if (preg_match($patterns['profile'], $input, $matches)) {
+            return $matches[1];
+        }
+        
+        // Case 4: Input is a vanity URL (steamcommunity.com/id/heavenanvil)
+        if (preg_match($patterns['id'], $input, $matches)) {
+            $vanity_name = $matches[1];
+            return steam_api_resolve_vanity_url($vanity_name, $api_key);
+        }
+        
+        // Case 5: Input is a vanity name (Heavenanvil)
+        if (preg_match($patterns['vanity'], $input)) {
+            return steam_api_resolve_vanity_url($input, $api_key);
+        }
+        
+        return false;
+        
+    } catch (Exception $e) {
+        error_log('Steam API Plugin Error: ' . $e->getMessage());
+        return false;
+    }
+}
+
+/**
+ * Resolves a vanity URL to a SteamID64
+ *
+ * @param string $vanity_name Vanity URL name
+ * @param string $api_key Steam API key
+ * @return string|false SteamID64 if successful, false otherwise
+ */
+function steam_api_resolve_vanity_url($vanity_name, $api_key) {
+    $resolve_url = "https://api.steampowered.com/ISteamUser/ResolveVanityURL/v1/?key={$api_key}&vanityurl={$vanity_name}";
+    
+    $response = wp_remote_get($resolve_url);
+    
+    if (is_wp_error($response)) {
+        return false;
+    }
+    
+    $body = wp_remote_retrieve_body($response);
+    $data = json_decode($body, true);
+    
+    if (isset($data['response']['success']) && $data['response']['success'] == 1) {
+        return $data['response']['steamid'];
+    }
+    
+    return false;
+}
+
+/**
+ * Converts SteamID64 to SteamID32
+ *
+ * @param string $steam_id64 SteamID64 format ID
+ * @return string SteamID32 format
+ */
+function getSteamID32($steam_id64) {
+    if (strlen($steam_id64) === 17) {
+        // Use BC Math for large integer calculations
+        $account_id = bcsub($steam_id64, '76561197960265728');
+    } else {
+        // This is an error condition, but return a formatted result for compatibility
+        $account_id = $steam_id64;
+    }
+    
+    return $account_id;
+}
