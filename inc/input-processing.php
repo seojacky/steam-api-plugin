@@ -2,7 +2,7 @@
 /**
  * Steam API Plugin - Functions for processing various Steam ID formats
  * 
- * Version: 1.2
+ * Version: 1.3
  */
 function getSteamID64($user) {
     // Get API key from WordPress options
@@ -24,13 +24,13 @@ function getSteamID64($user) {
         $steamid4 = '~^(http[s]?://)?(www\.)?steamcommunity.com/profiles/([^-_]{1}[\d(/)?]+)$~'; //steamcommunity.com/profiles/76561198036370701
         $steamid5 = '~^(http[s]?://)?(www\.)?steamcommunity.com/id/([^-_]{1}[-a-zA-Z_\d(/)?]+)$~'; //steamcommunity.com/id/heavenanvil
 
-        //Обращение к api.steampowered.com
+        // Обращение к api.steampowered.com
 
-        if (preg_match($steamid1, $okay, $matches)) //Если данные из Input вида "STEAM_0:1:38052486"
+        if (preg_match($steamid1, $okay, $matches)) // If input is like "STEAM_0:1:38052486"
         {
             $valid1     = $matches[1];
             $valid2     = $matches[2];
-            $realokay   = ($valid2 * 2) + 76561197960265728 + $valid1; //Формула расчета steamID64 из STEAM_0:X:XXXXXXXX
+            $realokay   = ($valid2 * 2) + 76561197960265728 + $valid1; // Formula to calculate steamID64 from STEAM_0:X:XXXXXXXX
             
             // Use WordPress HTTP API instead of file_get_contents
             $response = wp_remote_get("https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=$apikey&steamids=$realokay");
@@ -40,7 +40,7 @@ function getSteamID64($user) {
                 $data_obj = json_decode($urljson);
                 if (isset($data_obj->response->players[0])) {
                     $data = (array) $data_obj->response->players[0];
-                    $profileurl = $data['profileurl']; //Находим profileurl (customurl)
+                    $profileurl = $data['profileurl']; // Find profileurl (customurl)
                 }
             } else {
                 return false;
@@ -56,18 +56,18 @@ function getSteamID64($user) {
                 $data_obj = json_decode($urljson);
                 if (isset($data_obj->response->players[0])) {
                     $data = (array) $data_obj->response->players[0];
-                    $profileurl = $data['profileurl']; //Находим profileurl (customurl)
+                    $profileurl = $data['profileurl']; // Find profileurl (customurl)
                 }
             } else {
                 return false;
             }
         }
         
-        if (preg_match($steamid4, $profileurl, $matchespro)) //Если profileurl вида "steamcommunity.com/profiles/76561198036370701", находим "76561198036370701" из ссылки
+        if (preg_match($steamid4, $profileurl, $matchespro)) // If profileurl is like "steamcommunity.com/profiles/76561198036370701", extract "76561198036370701"
         {
-            if (substr($matchespro[3], -1) == '/') //Если на конце знак "/"
+            if (substr($matchespro[3], -1) == '/') // If there's a trailing "/"
             {
-                $myurl = substr($matchespro[3], 0, -1); //Убираем его
+                $myurl = substr($matchespro[3], 0, -1); // Remove it
             } else {
                 $myurl = $matchespro[3];
             }
@@ -85,11 +85,11 @@ function getSteamID64($user) {
             }
         }
 
-        if (preg_match($steamid5, $profileurl, $matchesid)) //Если profileurl вида "steamcommunity.com/id/heavenanvil", находим "heavenanvil" из ссылки
+        if (preg_match($steamid5, $profileurl, $matchesid)) // If profileurl is like "steamcommunity.com/id/heavenanvil", extract "heavenanvil"
         {
-            if (substr($matchesid[3], -1) == '/') //Если на конце знак "/"
+            if (substr($matchesid[3], -1) == '/') // If there's a trailing "/"
             {
-                $myurl = substr($matchesid[3], 0, -1); //Убираем его
+                $myurl = substr($matchesid[3], 0, -1); // Remove it
             } else {
                 $myurl = $matchesid[3];
             }
@@ -107,7 +107,7 @@ function getSteamID64($user) {
             }
         }
         
-        if (preg_match($steamid3, $okay)) //Если Input вида "Heavenanvil"
+        if (preg_match($steamid3, $okay)) // If input is like "Heavenanvil"
         {
             // Use WordPress HTTP API to fetch and parse XML
             $xml_url = "https://steamcommunity.com/id/$okay/?xml=1";
@@ -123,11 +123,11 @@ function getSteamID64($user) {
         }
         
         if (preg_match($steamid4, $okay)) {
-            if (preg_match($steamid4, $okay, $matchespro)) //Если Input вида "steamcommunity.com/profiles/76561198036370701", находим "76561198036370701" из ссылки
+            if (preg_match($steamid4, $okay, $matchespro)) // If input is like "steamcommunity.com/profiles/76561198036370701", extract "76561198036370701"
             {
-                if (substr($matchespro[3], -1) == '/') //Если на конце знак "/"
+                if (substr($matchespro[3], -1) == '/') // If there's a trailing "/"
                 {
-                    $myurl = substr($matchespro[3], 0, -1); //Убираем его
+                    $myurl = substr($matchespro[3], 0, -1); // Remove it
                 } else {
                     $myurl = $matchespro[3];
                 }
@@ -140,17 +140,17 @@ function getSteamID64($user) {
                     $data_obj = json_decode($urljson);
                     if (isset($data_obj->response->players[0])) {
                         $data = (array) $data_obj->response->players[0];
-                        $profileurl = $data['profileurl']; //Проверяем, есть ли customurl
+                        $profileurl = $data['profileurl']; // Check if there's a customurl
                     }
                 } else {
                     return false;
                 }
                 
-                if (preg_match($steamid4, $profileurl, $matchesprox)) //Если profileurl вида "steamcommunity.com/profiles/76561198036370701", находим "76561198036370701" из ссылки
+                if (preg_match($steamid4, $profileurl, $matchesprox)) // If profileurl is like "steamcommunity.com/profiles/76561198036370701", extract "76561198036370701"
                 {
-                    if (substr($matchesprox[3], -1) == '/') //Если на конце знак "/"
+                    if (substr($matchesprox[3], -1) == '/') // If there's a trailing "/"
                     {
-                        $myurlx = substr($matchesprox[3], 0, -1); //Убираем его
+                        $myurlx = substr($matchesprox[3], 0, -1); // Remove it
                     } else {
                         $myurlx = $matchesprox[3];
                     }
@@ -168,11 +168,11 @@ function getSteamID64($user) {
                     }
                 }
 
-                if (preg_match($steamid5, $profileurl, $matchesprox)) //Если profileurl вида "steamcommunity.com/profiles/76561198036370701", находим "76561198036370701" из ссылки
+                if (preg_match($steamid5, $profileurl, $matchesprox)) // If profileurl is like "steamcommunity.com/profiles/76561198036370701", extract "76561198036370701"
                 {
-                    if (substr($matchesprox[3], -1) == '/') //Если на конце знак "/"
+                    if (substr($matchesprox[3], -1) == '/') // If there's a trailing "/"
                     {
-                        $myurlx = substr($matchesprox[3], 0, -1); //Убираем его
+                        $myurlx = substr($matchesprox[3], 0, -1); // Remove it
                     } else {
                         $myurlx = $matchesprox[3];
                     }
@@ -192,11 +192,11 @@ function getSteamID64($user) {
             }
         }
 
-        if (preg_match($steamid5, $okay, $matchesid)) //Если profileurl вида "steamcommunity.com/id/heavenanvil", находим "heavenanvil" из ссылки
+        if (preg_match($steamid5, $okay, $matchesid)) // If profileurl is like "steamcommunity.com/id/heavenanvil", extract "heavenanvil"
         {
-            if (substr($matchesid[3], -1) == '/') //Если на конце знак "/"
+            if (substr($matchesid[3], -1) == '/') // If there's a trailing "/"
             {
-                $myurl = substr($matchesid[3], 0, -1); //Убираем его
+                $myurl = substr($matchesid[3], 0, -1); // Remove it
             } else {
                 $myurl = $matchesid[3];
             }

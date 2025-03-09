@@ -2,7 +2,7 @@
 /**
  * Steam API Plugin - Function to fetch player stats from Steam API
  * 
- * Version: 1.2
+ * Version: 1.3
  */
 function fetch_steam_player_stats($steamId) {
     // Get API key from WordPress options
@@ -10,7 +10,7 @@ function fetch_steam_player_stats($steamId) {
     
     // Check if API key is available
     if (!$api_key) {
-        return array('error' => 'Steam API key is not configured.');
+        return array('error' => __('Steam API key is not configured.', STEAM_API_TEXT_DOMAIN));
     }
 
     // Array to store player statistics
@@ -35,10 +35,12 @@ function fetch_steam_player_stats($steamId) {
             $player_stats['locstatecode'] = isset($player_info['locstatecode']) ? $player_info['locstatecode'] : '';
             $player_stats['loccityid'] = isset($player_info['loccityid']) ? $player_info['loccityid'] : '';
             $player_stats['personastate'] = isset($player_info['personastate']) ? $player_info['personastate'] : '';
+        } else {
+            return array('error' => __('Player profile not found.', STEAM_API_TEXT_DOMAIN));
         }
     } else {
-        $error_message = is_wp_error($profile_response) ? $profile_response->get_error_message() : 'Unknown error when contacting Steam API';
-        return array('error' => 'Error while requesting Steam API: ' . $error_message);
+        $error_message = is_wp_error($profile_response) ? $profile_response->get_error_message() : __('Unknown error when contacting Steam API', STEAM_API_TEXT_DOMAIN);
+        return array('error' => __('Error while requesting Steam API:', STEAM_API_TEXT_DOMAIN) . ' ' . $error_message);
     }
 
     // Get player's level using WordPress HTTP API
@@ -53,8 +55,8 @@ function fetch_steam_player_stats($steamId) {
             $player_stats['playerlevel'] = "";
         }
     } else {
-        $error_message = is_wp_error($level_response) ? $level_response->get_error_message() : 'Unknown error when contacting Steam API';
-        return array('error' => 'Error while requesting Steam API: ' . $error_message);
+        $error_message = is_wp_error($level_response) ? $level_response->get_error_message() : __('Unknown error when contacting Steam API', STEAM_API_TEXT_DOMAIN);
+        return array('error' => __('Error while requesting Steam API:', STEAM_API_TEXT_DOMAIN) . ' ' . $error_message);
     }
 
     return $player_stats;

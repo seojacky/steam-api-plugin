@@ -79,6 +79,14 @@ The plugin will display a notification to administrators to configure the API ke
 
 == Changelog ==
 
+= 1.3 - 10.03.25 =
+* Added full translation support with __() and _e() functions
+* Removed hardcoded Russian strings from JavaScript and HTML
+* Implemented proper text domain and translation infrastructure
+* Added Russian translation (ru_RU)
+* Created template directory structure for better organization
+* Improved error handling with internationalized messages
+
 = 1.2 - 09.03.25 =
 * Removed hardcoded API key for improved security
 * Replaced all file_get_contents() calls with WordPress HTTP API (wp_remote_get())
