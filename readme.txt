@@ -3,7 +3,7 @@ Contributors: develabr
 Tags: steam, api, steamid, profile, gaming
 Requires at least: 4.7
 Tested up to: 6.4
-Stable tag: 1.1
+Stable tag: 1.2
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -36,6 +36,7 @@ The Steam API Plugin allows you to embed Steam profile information on your WordP
 * Responsive design for all device sizes
 * Simple settings page for API key management
 * Cache system to reduce API calls and improve performance
+* Secure API handling and error management
 
 = Usage =
 
@@ -66,6 +67,10 @@ The plugin only temporarily caches API responses to improve performance. No perm
 
 Make sure your Steam API key is correctly set up in the plugin settings (Settings → Steam API). Also, ensure the domain you registered with Steam matches your WordPress site domain.
 
+= What happens if I don't enter a Steam API key? =
+
+The plugin will display a notification to administrators to configure the API key. For regular visitors, the plugin will show a message that the feature is temporarily unavailable.
+
 == Screenshots ==
 
 1. Steam profile search form
@@ -73,6 +78,16 @@ Make sure your Steam API key is correctly set up in the plugin settings (Setting
 3. Settings page
 
 == Changelog ==
+
+= 1.2 - 09.03.25 =
+* Removed hardcoded API key for improved security
+* Replaced all file_get_contents() calls with WordPress HTTP API (wp_remote_get())
+* Switched from HTTP to HTTPS for all API requests
+* Added proper error handling throughout the plugin
+* Improved API key validation in settings
+* Added user-friendly messages when API key is not configured
+* Enhanced security for XML parsing
+* Better validation of API responses
 
 = 1.1 - 09.03.25 =
 * Added settings page for API key and cache duration management
@@ -83,6 +98,9 @@ Make sure your Steam API key is correctly set up in the plugin settings (Setting
 * Initial release
 
 == Upgrade Notice ==
+
+= 1.2 =
+Security update: This version removes hardcoded API keys, improves error handling, and enhances security for API requests. Please update immediately and ensure your API key is properly configured in Settings → Steam API.
 
 = 1.1 =
 This update adds a settings page for the Steam API key and implements caching for better performance.
