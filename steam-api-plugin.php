@@ -2,12 +2,27 @@
 /*
 Plugin Name: Steam API Plugin
 Description: Plugin adds opportunity to check Steam ID info on your web-pages.
-Version: 1.2
+Version: 1.3
 Author: develabr, seo_jacky
 Author URI: https://t.me/big_jacky
 Plugin URI: https://github.com/seojacky/steam-api-plugin
 GitHub Plugin URI: https://github.com/seojacky/steam-api-plugin
+Text Domain: steam-api-plugin
+Domain Path: /languages
 */
+
+// Define text domain constant
+define('STEAM_API_TEXT_DOMAIN', 'steam-api-plugin');
+
+// Load plugin text domain
+function steam_api_load_textdomain() {
+    load_plugin_textdomain(
+        STEAM_API_TEXT_DOMAIN,
+        false,
+        dirname(plugin_basename(__FILE__)) . '/languages/'
+    );
+}
+add_action('plugins_loaded', 'steam_api_load_textdomain');
 
 require_once(plugin_dir_path(__FILE__) . 'ajax/ajax-handler.php');
 // Connecting the file with the user input processing function
@@ -29,8 +44,8 @@ function steam_api_activate() {
 add_action('admin_menu', 'steam_api_add_admin_menu');
 function steam_api_add_admin_menu() {
     add_options_page(
-        'Steam API Settings',
-        'Steam API',
+        __('Steam API Settings', STEAM_API_TEXT_DOMAIN),
+        __('Steam API', STEAM_API_TEXT_DOMAIN),
         'manage_options',
         'steam_api_settings',
         'steam_api_settings_page'
@@ -56,7 +71,7 @@ function steam_api_sanitize_settings($input) {
                 add_settings_error(
                     'steam_api_settings',
                     'invalid_api_key',
-                    'The Steam API key appears to be invalid. Please check it and try again.',
+                    __('The Steam API key appears to be invalid. Please check it and try again.', STEAM_API_TEXT_DOMAIN),
                     'error'
                 );
             }
@@ -81,7 +96,7 @@ function steam_api_settings_page() {
             <table class="form-table">
                 <tr>
                     <th scope="row">
-                        <label for="steam_api_settings[api_key]">Steam API Key</label>
+                        <label for="steam_api_settings[api_key]"><?php _e('Steam API Key', STEAM_API_TEXT_DOMAIN); ?></label>
                     </th>
                     <td>
                         <input type="text" 
@@ -90,16 +105,16 @@ function steam_api_settings_page() {
                                value="<?php echo esc_attr($settings['api_key']); ?>" 
                                class="regular-text" />
                         <p class="description">
-                            Enter your Steam API key. You can get one from 
+                            <?php _e('Enter your Steam API key. You can get one from', STEAM_API_TEXT_DOMAIN); ?> 
                             <a href="https://steamcommunity.com/dev/apikey" target="_blank">
-                                Steam Web API Key Registration
+                                <?php _e('Steam Web API Key Registration', STEAM_API_TEXT_DOMAIN); ?>
                             </a>
                         </p>
                     </td>
                 </tr>
                 <tr>
                     <th scope="row">
-                        <label for="steam_api_settings[cache_duration]">Cache Duration (seconds)</label>
+                        <label for="steam_api_settings[cache_duration]"><?php _e('Cache Duration (seconds)', STEAM_API_TEXT_DOMAIN); ?></label>
                     </th>
                     <td>
                         <input type="number" 
@@ -108,7 +123,7 @@ function steam_api_settings_page() {
                                value="<?php echo esc_attr($settings['cache_duration']); ?>" 
                                class="regular-text" />
                         <p class="description">
-                            Duration to cache API results in seconds. Default is 3600 (1 hour).
+                            <?php _e('Duration to cache API results in seconds. Default is 3600 (1 hour).', STEAM_API_TEXT_DOMAIN); ?>
                         </p>
                     </td>
                 </tr>
@@ -125,7 +140,11 @@ function steam_api_admin_notice() {
     if (empty($settings['api_key']) && current_user_can('manage_options')) {
         ?>
         <div class="notice notice-error is-dismissible">
-            <p><?php _e('Steam API Plugin requires a Steam API key to function. Please <a href="options-general.php?page=steam_api_settings">configure it now</a>.', 'steam-api-plugin'); ?></p>
+            <p><?php printf(
+                __('Steam API Plugin requires a Steam API key to function. Please %sconfigure it now%s.', STEAM_API_TEXT_DOMAIN),
+                '<a href="options-general.php?page=steam_api_settings">',
+                '</a>'
+            ); ?></p>
         </div>
         <?php
     }
@@ -169,11 +188,65 @@ function steam_api_enqueue_scripts() {
 
     $localized_data = array(
         'ajax_url' => admin_url('admin-ajax.php'),
+        'i18n' => array(
+            'offline' => __('🔴 Offline', STEAM_API_TEXT_DOMAIN),
+            'online' => __('🟢 Online', STEAM_API_TEXT_DOMAIN),
+            'busy' => __('Busy', STEAM_API_TEXT_DOMAIN),
+            'away' => __('Away', STEAM_API_TEXT_DOMAIN),
+            'snooze' => __('Snooze', STEAM_API_TEXT_DOMAIN),
+            'lookingToTrade' => __('Looking to trade', STEAM_API_TEXT_DOMAIN),
+            'lookingToPlay' => __('Looking to play', STEAM_API_TEXT_DOMAIN),
+            'unknown' => __('Unknown', STEAM_API_TEXT_DOMAIN),
+            'private' => __('Private', STEAM_API_TEXT_DOMAIN),
+            'public' => __('Public', STEAM_API_TEXT_DOMAIN),
+            'level' => __('Level', STEAM_API_TEXT_DOMAIN),
+            'copyButton' => __('Copy', STEAM_API_TEXT_DOMAIN),
+            'copyButtonDone' => __('Done', STEAM_API_TEXT_DOMAIN),
+            'steamID2' => __('SteamID2', STEAM_API_TEXT_DOMAIN),
+            'steamID3' => __('SteamID3', STEAM_API_TEXT_DOMAIN),
+            'steamID64' => __('SteamID64', STEAM_API_TEXT_DOMAIN),
+            'realName' => __('Real Name', STEAM_API_TEXT_DOMAIN),
+            'hidden' => __('Hidden', STEAM_API_TEXT_DOMAIN),
+            'profileURL' => __('Profile URL', STEAM_API_TEXT_DOMAIN),
+            'accountCreated' => __('Account created', STEAM_API_TEXT_DOMAIN),
+            'visibility' => __('Visibility', STEAM_API_TEXT_DOMAIN),
+            'status' => __('Status', STEAM_API_TEXT_DOMAIN),
+            'location' => __('Location', STEAM_API_TEXT_DOMAIN),
+            'avatar' => __('Avatar', STEAM_API_TEXT_DOMAIN),
+            'errorFetchingData' => __('Error fetching player data.', STEAM_API_TEXT_DOMAIN),
+            'playerNotFound' => __('Player data not found.', STEAM_API_TEXT_DOMAIN),
+            'find' => __('Find', STEAM_API_TEXT_DOMAIN),
+            'enterDetails' => __('Enter SteamID / SteamCommunityID / Profile Name / Profile URL', STEAM_API_TEXT_DOMAIN),
+            'findSteamId' => __('Find and get your Steam ID, Steam ID 64, customURL and community ID', STEAM_API_TEXT_DOMAIN),
+            'examples' => __('For example:
+Heavenanvil
+76561198036370701
+STEAM_0:1:38052486
+steamcommunity.com/id/heavenanvil
+steamcommunity.com/profiles/76561198036370701', STEAM_API_TEXT_DOMAIN)
+        )
     );
-    wp_localize_script('steam-api-scripts', 'ajax_object', $localized_data);
+    wp_localize_script('steam-api-scripts', 'steamApiData', $localized_data);
 }
 add_action('wp_enqueue_scripts', 'steam_api_enqueue_scripts');
 
+// Create templates directory if it doesn't exist
+function steam_api_create_templates_directory() {
+    $templates_dir = plugin_dir_path(__FILE__) . 'templates';
+    if (!file_exists($templates_dir)) {
+        mkdir($templates_dir, 0755, true);
+    }
+}
+register_activation_hook(__FILE__, 'steam_api_create_templates_directory');
+
+// Create languages directory if it doesn't exist
+function steam_api_create_languages_directory() {
+    $languages_dir = plugin_dir_path(__FILE__) . 'languages';
+    if (!file_exists($languages_dir)) {
+        mkdir($languages_dir, 0755, true);
+    }
+}
+register_activation_hook(__FILE__, 'steam_api_create_languages_directory');
 
 function steam_api_shortcode() {
     // Check if API key is configured
@@ -181,35 +254,19 @@ function steam_api_shortcode() {
     
     if (!$api_key) {
         if (current_user_can('manage_options')) {
-            return '<div class="steam-api-wrapper"><div class="steam-api-error">Steam API key is not configured. <a href="' . admin_url('options-general.php?page=steam_api_settings') . '">Configure it now</a>.</div></div>';
+            return '<div class="steam-api-wrapper"><div class="steam-api-error">' . 
+                   sprintf(__('Steam API key is not configured. %sConfigure it now%s.', STEAM_API_TEXT_DOMAIN), 
+                   '<a href="' . admin_url('options-general.php?page=steam_api_settings') . '">', '</a>') . 
+                   '</div></div>';
         } else {
-            return '<div class="steam-api-wrapper"><div class="steam-api-error">This feature is currently unavailable. Please contact the site administrator.</div></div>';
+            return '<div class="steam-api-wrapper"><div class="steam-api-error">' . 
+                   __('This feature is currently unavailable. Please contact the site administrator.', STEAM_API_TEXT_DOMAIN) . 
+                   '</div></div>';
         }
     }
     
     ob_start();
-
-    return
-        '<div class="steam-api-wrapper">
-            <div class="steam-api-info">
-                <form class="form" id="steam-form" autocomplete="off">
-                    <div class="input-group">
-                        <input type="text" id="steamInput" class="form-input" title="Например:
-Heavenanvil
-76561198036370701
-STEAM_0:1:38052486
-steamcommunity.com/id/heavenanvil
-steamcommunity.com/profiles/76561198036370701" placeholder="Введите SteamID / SteamCommunityID / Имя профиля / URL профиля" style="border-top-left-radius: .25rem;border-bottom-left-radius: .25rem;">
-                        <button type="button" id="get-stats-button">Найти</button>
-                    </div>
-                    <p class="form-description">Найдите и получите свой Steam ID, Steam ID 64, customURL и идентификатор сообщества</p>
-                </form>
-            </div>
-            <div id="user-info" class="user-info-block"></div>
-            <div id="results"></div>
-        </div>';
-    ?>
-    <?php
+    include(plugin_dir_path(__FILE__) . 'templates/form-template.php');
     return ob_get_clean();
 }
 add_shortcode('steam_api', 'steam_api_shortcode');
@@ -222,7 +279,7 @@ function get_player_stats_callback() {
         // Check if API key is configured
         $api_key = steam_api_get_api_key();
         if (!$api_key) {
-            wp_send_json(array('error' => 'Steam API key is not configured. Please contact the site administrator.'));
+            wp_send_json(array('error' => __('Steam API key is not configured. Please contact the site administrator.', STEAM_API_TEXT_DOMAIN)));
             wp_die();
         }
         
@@ -249,6 +306,9 @@ function get_player_stats_callback() {
                 // Send data back to the client.
                 wp_send_json($player_stats);
             }
+        } else {
+            wp_send_json(array('error' => __('Could not find Steam profile. Please check your input and try again.', STEAM_API_TEXT_DOMAIN)));
+            wp_die();
         }
     }
 

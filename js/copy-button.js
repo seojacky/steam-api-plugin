@@ -1,3 +1,6 @@
+// js/copy-button.js
+import i18n from './i18n.js';
+
 export const copyText = (text, buttonElement) => {
   // Создаем временный элемент input для копирования текста
   const input = document.createElement('input');
@@ -15,5 +18,5 @@ export const copyText = (text, buttonElement) => {
   // Удаляем временный элемент input
   document.body.removeChild(input);
 
-  buttonElement.textContent = 'Done';
+  buttonElement.textContent = i18n.copyButtonDone;
 };

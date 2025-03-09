@@ -1,8 +1,10 @@
+// js/ui.js
 import { getLocation } from './location.js';
 import { getVisibility } from './visibility.js';
 import { getStatus } from './status.js';
 import { getSteamId2, getSteamId3 } from './steamId2.js';
 import { getFlagEmoji } from './flagEmoji.js';
+import i18n from './i18n.js';
 
 export const displayPlayerInfo = (data) => {
   const userInfo = document.getElementById('user-info');
@@ -18,19 +20,16 @@ export const displayPlayerInfo = (data) => {
   const status = getStatus(data.personastate);
   userInfo.innerHTML = `
 	<div class="card-body">
-
-
-
         <div class="text-center">
           <img
             width="75"
             height="75"
             class="user-avatar"
             loading="lazy"
-						alt="Avatar ${data.nickname}"
+						alt="${i18n.avatar} ${data.nickname}"
             src="${data.avatar}"
           />
-					<div class="lvl-wrap"><span>Level</span> ${
+					<div class="lvl-wrap"><span>${i18n.level}</span> ${
             data.playerlevel
               ? `<div class="player-level"><span>${data.playerlevel}</span></div>`
               : 'N/A'
@@ -41,48 +40,46 @@ export const displayPlayerInfo = (data) => {
         <hr />
         <dl class="row">
           <!--SteamID2 -->
-          <dt>SteamID2</dt>
+          <dt>${i18n.steamID2}</dt>
           <dd>
             <!--SteamID2 Value -->
             <span class="steamId2">${steamId2}</span>
-						<button class="button-copy"> Copy </button>
+						<button class="button-copy">${i18n.copyButton}</button>
           </dd>
           <!---->
           <!--SteamID3 -->
-          <dt>SteamID3</dt>
+          <dt>${i18n.steamID3}</dt>
           <dd>
             <!--SteamID3 Value -->
             <span class="steamId3">${steamId3}</span>
-						<button class="button-copy"> Copy </button>
+						<button class="button-copy">${i18n.copyButton}</button>
           </dd>
           <!---->
           <!--SteamID64 -->
-          <dt>SteamID64</dt>
+          <dt>${i18n.steamID64}</dt>
           <dd>
             <!--SteamID64 Value -->
             <span class="steamId64">${data.steamid}</span>
-						<button class="button-copy"> Copy </button>
+						<button class="button-copy">${i18n.copyButton}</button>
           </dd>
           <!---->
 
           <!--Real Name -->
-          <dt>Real Name</dt>
-          <dd>${data.realname ? data.realname : 'Hidden'}</dd>
+          <dt>${i18n.realName}</dt>
+          <dd>${data.realname ? data.realname : i18n.hidden}</dd>
           <!----><!---->
-          <dt>Profile URL</dt>
+          <dt>${i18n.profileURL}</dt>
           <dd>${data.profileurl}</dd>
-          <dt>Account created</dt>
-          <dd>${new Date(data.timecreated * 1000).toLocaleDateString(
-            'ru-RU'
-          )}</dd>
+          <dt>${i18n.accountCreated}</dt>
+          <dd>${new Date(data.timecreated * 1000).toLocaleDateString()}</dd>
           <!---->
-          <dt>Visibility</dt>
+          <dt>${i18n.visibility}</dt>
           <dd>${visibility}</dd>
           <!----><!----><!----><!---->
-          <dt>Status</dt>
+          <dt>${i18n.status}</dt>
           <dd>${status}</dd>
 					<!----><!----><!----><!---->
-          <dt>Location</dt>
+          <dt>${i18n.location}</dt>
           <dd><span class="profile-location">${location ? location : 'N/A'}${
     location ? `</span> <span class="profile-flag">${flagIcon}</span>` : ''
   }</dd>

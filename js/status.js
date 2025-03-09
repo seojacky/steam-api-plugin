@@ -1,21 +1,24 @@
+// js/status.js
+import i18n from './i18n.js';
+
 // Get personal status
 export const getStatus = (personastate) => {
   switch (personastate) {
     case 0:
-      return '🔴 Offline';
+      return i18n.offline;
     case 1:
-      return '🟢 Online';
+      return i18n.online;
     case 2:
-      return 'Busy';
+      return i18n.busy;
     case 3:
-      return 'Away';
+      return i18n.away;
     case 4:
-      return 'Snooze';
+      return i18n.snooze;
     case 5:
-      return 'Looking to trade';
+      return i18n.lookingToTrade;
     case 6:
-      return 'Looking to play';
+      return i18n.lookingToPlay;
     default:
-      return 'Unknown';
+      return i18n.unknown;
   }
 };

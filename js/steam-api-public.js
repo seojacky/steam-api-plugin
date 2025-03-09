@@ -1,6 +1,8 @@
+// js/steam-api-public.js
 import { displayPlayerInfo } from './ui.js';
 import { sendAjaxRequest } from './api.js';
 import { copyText } from './copy-button.js';
+import i18n from './i18n.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   const getStatsButton = document.getElementById('get-stats-button');
@@ -10,22 +12,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
   getStatsButton.addEventListener('click', async () => {
     const steamId = steamInput.value;
-	results.innerHTML = '';
+    results.innerHTML = '';
     userInfo.innerHTML = '';
 
     try {
       const data = await sendAjaxRequest(steamId);
 //       console.log(data);
 
+      if (data.error) {
+        results.innerHTML = data.error;
+        return;
+      }
+
       if (data) {
         displayPlayerInfo(data);
         addCopyButtonListener();
       } else {
-        results.innerHTML = 'Данные о статистике игрока не найдены.';
+        results.innerHTML = i18n.playerNotFound;
       }
     } catch (error) {
 //       console.error(error);
-      results.innerHTML = error.message;
+      results.innerHTML = i18n.errorFetchingData;
     }
   });
 

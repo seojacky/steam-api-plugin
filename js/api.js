@@ -1,7 +1,10 @@
+// js/api.js
+import i18n from './i18n.js';
+
 // Функция для отправки AJAX-запроса с использованием async/await
 export const sendAjaxRequest = async (steamId) => {
   try {
-    const response = await fetch(ajax_object.ajax_url, {
+    const response = await fetch(steamApiData.ajax_url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -10,13 +13,13 @@ export const sendAjaxRequest = async (steamId) => {
     });
 
     if (!response.ok) {
-      throw new Error('Ошибка при выполнении запроса.');
+      throw new Error(i18n.errorFetchingData);
     }
 
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error('Ops!! Error: ' + error);
-    throw new Error('Произошла ошибка при обработке данных.');
+    console.error('Error: ' + error);
+    throw new Error(i18n.errorFetchingData);
   }
 };
