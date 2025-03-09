@@ -2,8 +2,11 @@
 /*
 Plugin Name: Steam API Plugin
 Description: Plugin adds opportunity to check Steam ID info on your web-pages.
-Version: 1.0
-Author: develabr
+Version: 1.1
+Author: develabr, seo_jacky
+Author URI: https://t.me/big_jacky
+Plugin URI: https://github.com/seojacky/steam-api-plugin
+GitHub Plugin URI: https://github.com/seojacky/steam-api-plugin
 */
 
 require_once(plugin_dir_path(__FILE__) . 'ajax/ajax-handler.php');
