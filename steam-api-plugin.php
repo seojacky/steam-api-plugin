@@ -1,5 +1,4 @@
 <?php
-
 /*
 Plugin Name: Steam API Plugin
 Description: Plugin adds opportunity to check Steam ID info on your web-pages.
