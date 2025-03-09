@@ -1,0 +1,215 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Steam API Plugin 1.3\n"
+"POT-Creation-Date: 2025-03-10 12:00+0000\n"
+"PO-Revision-Date: 2025-03-09 22:24+0000\n"
+"Last-Translator: Jack Muller\n"
+"Language-Team: English (United States)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Poedit-KeywordsList: __;_e;esc_html__;esc_html_e;esc_attr__;esc_attr_e;_x;"
+"_ex;esc_attr_x;esc_html_x;_n;_nx\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: languages\n"
+"X-Poedit-SearchPathExcluded-1: .git\n"
+"Report-Msgid-Bugs-To: \n"
+"Language: en_US\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Loco-Version: 2.7.1; wp-6.7.2"
+
+#: steam-api-plugin.php:283
+msgid "Account created"
+msgstr "Account created"
+
+#: steam-api-plugin.php:287
+msgid "Avatar"
+msgstr "Avatar"
+
+#: steam-api-plugin.php:267
+msgid "Away"
+msgstr ""
+
+#: steam-api-plugin.php:266
+msgid "Busy"
+msgstr ""
+
+#: steam-api-plugin.php:122
+msgid "Cache Duration (seconds)"
+msgstr ""
+
+#: steam-api-plugin.php:275
+msgid "Copy"
+msgstr ""
+
+#: steam-api-plugin.php:300
+msgid "Could not find Steam profile. Please check your input and try again."
+msgstr ""
+
+#: steam-api-plugin.php:276
+msgid "Done"
+msgstr ""
+
+#: steam-api-plugin.php:131
+msgid "Duration to cache API results in seconds. Default is 3600 (1 hour)."
+msgstr ""
+
+#: templates/form-template.php:16
+msgid "Enter SteamID / SteamCommunityID / Profile Name / Profile URL"
+msgstr ""
+
+#: steam-api-plugin.php:114
+msgid "Enter your Steam API key. You can get one from"
+msgstr ""
+
+#: steam-api-plugin.php:288
+msgid "Error fetching player data."
+msgstr ""
+
+#: ajax-handler.php:44
+msgid "Error while requesting Steam API:"
+msgstr ""
+
+#: templates/form-template.php:18
+msgid "Find"
+msgstr ""
+
+#: templates/form-template.php:20
+msgid "Find and get your Steam ID, Steam ID 64, customURL and community ID"
+msgstr ""
+
+#: templates/form-template.php:11
+msgid ""
+"For example:\n"
+"Heavenanvil\n"
+"76561198036370701\n"
+"STEAM_0:1:38052486\n"
+"steamcommunity.com/id/heavenanvil\n"
+"steamcommunity.com/profiles/76561198036370701"
+msgstr ""
+
+#: steam-api-plugin.php:281
+msgid "Hidden"
+msgstr ""
+
+#: steam-api-plugin.php:274
+msgid "Level"
+msgstr ""
+
+#: steam-api-plugin.php:286
+msgid "Location"
+msgstr ""
+
+#: steam-api-plugin.php:270
+msgid "Looking to play"
+msgstr ""
+
+#: steam-api-plugin.php:269
+msgid "Looking to trade"
+msgstr ""
+
+#: steam-api-plugin.php:289
+msgid "Player data not found."
+msgstr ""
+
+#: ajax-handler.php:40
+msgid "Player profile not found."
+msgstr ""
+
+#: steam-api-plugin.php:272
+msgid "Private"
+msgstr ""
+
+#: steam-api-plugin.php:282
+msgid "Profile URL"
+msgstr ""
+
+#: steam-api-plugin.php:273
+msgid "Public"
+msgstr ""
+
+#: steam-api-plugin.php:280
+msgid "Real Name"
+msgstr ""
+
+#: steam-api-plugin.php:268
+msgid "Snooze"
+msgstr ""
+
+#: steam-api-plugin.php:285
+msgid "Status"
+msgstr ""
+
+#: steam-api-plugin.php:56
+msgid "Steam API"
+msgstr ""
+
+#: steam-api-plugin.php:105
+msgid "Steam API Key"
+msgstr ""
+
+#: ajax-handler.php:15
+msgid "Steam API key is not configured."
+msgstr ""
+
+#: steam-api-plugin.php:246 steam-api-plugin.php:257
+msgid "Steam API key is not configured. %sConfigure it now%s."
+msgstr ""
+
+#: steam-api-plugin.php:145
+msgid ""
+"Steam API Plugin requires a Steam API key to function. Please %sconfigure it "
+"now%s."
+msgstr ""
+
+#: steam-api-plugin.php:55
+msgid "Steam API Settings"
+msgstr ""
+
+#: steam-api-plugin.php:116
+msgid "Steam Web API Key Registration"
+msgstr ""
+
+#: steam-api-plugin.php:277
+msgid "SteamID2"
+msgstr ""
+
+#: steam-api-plugin.php:278
+msgid "SteamID3"
+msgstr ""
+
+#: steam-api-plugin.php:279
+msgid "SteamID64"
+msgstr ""
+
+#: steam-api-plugin.php:81
+msgid "The Steam API key appears to be invalid. Please check it and try again."
+msgstr ""
+
+#: steam-api-plugin.php:259
+msgid ""
+"This feature is currently unavailable. Please contact the site administrator."
+msgstr ""
+"This feature is currently unavailable. Please contact the site administrator."
+
+#: steam-api-plugin.php:271
+msgid "Unknown"
+msgstr ""
+
+#: ajax-handler.php:43
+msgid "Unknown error when contacting Steam API"
+msgstr ""
+
+#: steam-api-plugin.php:284
+msgid "Visibility"
+msgstr ""
+
+#: steam-api-plugin.php:264
+msgid "🔴 Offline"
+msgstr ""
+
+#: steam-api-plugin.php:265
+msgid "🟢 Online"
+msgstr ""
