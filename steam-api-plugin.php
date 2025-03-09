@@ -2,7 +2,7 @@
 /*
 Plugin Name: Steam API Plugin
 Description: Plugin adds opportunity to check Steam ID info on your web-pages.
-Version: 1.1
+Version: 1.2
 Author: develabr, seo_jacky
 Author URI: https://t.me/big_jacky
 Plugin URI: https://github.com/seojacky/steam-api-plugin
@@ -19,7 +19,7 @@ function steam_api_activate() {
     // Add default options if they don't exist
     if (!get_option('steam_api_settings')) {
         add_option('steam_api_settings', array(
-            'api_key' => '2EF6E52E83E288756136106E81C4B41E', // Default API key
+            'api_key' => '', // No default API key - must be configured by admin
             'cache_duration' => 3600, // Default cache duration in seconds (1 hour)
         ));
     }
@@ -49,6 +49,18 @@ function steam_api_sanitize_settings($input) {
     
     if (isset($input['api_key'])) {
         $sanitized_input['api_key'] = sanitize_text_field($input['api_key']);
+        
+        // Validate API key format
+        if (!empty($sanitized_input['api_key'])) {
+            if (strlen($sanitized_input['api_key']) < 32) {
+                add_settings_error(
+                    'steam_api_settings',
+                    'invalid_api_key',
+                    'The Steam API key appears to be invalid. Please check it and try again.',
+                    'error'
+                );
+            }
+        }
     }
     
     if (isset($input['cache_duration'])) {
@@ -107,10 +119,25 @@ function steam_api_settings_page() {
     <?php
 }
 
+// Admin notice if API key is not configured
+function steam_api_admin_notice() {
+    $settings = get_option('steam_api_settings');
+    if (empty($settings['api_key']) && current_user_can('manage_options')) {
+        ?>
+        <div class="notice notice-error is-dismissible">
+            <p><?php _e('Steam API Plugin requires a Steam API key to function. Please <a href="options-general.php?page=steam_api_settings">configure it now</a>.', 'steam-api-plugin'); ?></p>
+        </div>
+        <?php
+    }
+}
+add_action('admin_notices', 'steam_api_admin_notice');
+
 // Helper function to get API key (used in ajax-handler.php and input-processing.php)
 function steam_api_get_api_key() {
     $settings = get_option('steam_api_settings');
-    return isset($settings['api_key']) ? $settings['api_key'] : '2EF6E52E83E288756136106E81C4B41E';
+    return isset($settings['api_key']) && !empty($settings['api_key']) 
+        ? $settings['api_key'] 
+        : false; // Return false instead of a hardcoded key
 }
 
 // Helper function to get cache duration
@@ -149,6 +176,17 @@ add_action('wp_enqueue_scripts', 'steam_api_enqueue_scripts');
 
 
 function steam_api_shortcode() {
+    // Check if API key is configured
+    $api_key = steam_api_get_api_key();
+    
+    if (!$api_key) {
+        if (current_user_can('manage_options')) {
+            return '<div class="steam-api-wrapper"><div class="steam-api-error">Steam API key is not configured. <a href="' . admin_url('options-general.php?page=steam_api_settings') . '">Configure it now</a>.</div></div>';
+        } else {
+            return '<div class="steam-api-wrapper"><div class="steam-api-error">This feature is currently unavailable. Please contact the site administrator.</div></div>';
+        }
+    }
+    
     ob_start();
 
     return
@@ -181,6 +219,13 @@ add_action('wp_ajax_nopriv_get_player_stats', 'get_player_stats_callback');
 
 function get_player_stats_callback() {
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        // Check if API key is configured
+        $api_key = steam_api_get_api_key();
+        if (!$api_key) {
+            wp_send_json(array('error' => 'Steam API key is not configured. Please contact the site administrator.'));
+            wp_die();
+        }
+        
         $inputValue = sanitize_text_field($_POST['steamId']); // Get player ID
 
         // Get Steam ID from the user input.
