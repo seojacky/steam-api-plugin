@@ -35,6 +35,9 @@ function fetch_steam_player_stats($steamId) {
             $player_stats['locstatecode'] = isset($player_info['locstatecode']) ? $player_info['locstatecode'] : '';
             $player_stats['loccityid'] = isset($player_info['loccityid']) ? $player_info['loccityid'] : '';
             $player_stats['personastate'] = isset($player_info['personastate']) ? $player_info['personastate'] : '';
+            
+            // Add last login time information
+            $player_stats['last_logoff'] = isset($player_info['lastlogoff']) ? $player_info['lastlogoff'] : null;
         } else {
             return array('error' => __('Player profile not found.', STEAM_API_TEXT_DOMAIN));
         }
@@ -56,6 +59,34 @@ function fetch_steam_player_stats($steamId) {
         }
     } else {
         $error_message = is_wp_error($level_response) ? $level_response->get_error_message() : __('Unknown error when contacting Steam API', STEAM_API_TEXT_DOMAIN);
+        return array('error' => __('Error while requesting Steam API:', STEAM_API_TEXT_DOMAIN) . ' ' . $error_message);
+    }
+    
+    // Get player ban information
+    $bans_url = "https://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key={$api_key}&steamids={$steamId}";
+    $bans_response = wp_remote_get($bans_url);
+    
+    if (!is_wp_error($bans_response) && wp_remote_retrieve_response_code($bans_response) === 200) {
+        $bans_data = json_decode(wp_remote_retrieve_body($bans_response), true);
+        if (isset($bans_data['players'][0])) {
+            $bans_info = $bans_data['players'][0];
+            $player_stats['vac_banned'] = isset($bans_info['VACBanned']) ? $bans_info['VACBanned'] : false;
+            $player_stats['vac_ban_count'] = isset($bans_info['NumberOfVACBans']) ? $bans_info['NumberOfVACBans'] : 0;
+            $player_stats['days_since_last_ban'] = isset($bans_info['DaysSinceLastBan']) ? $bans_info['DaysSinceLastBan'] : 0;
+            $player_stats['community_banned'] = isset($bans_info['CommunityBanned']) ? $bans_info['CommunityBanned'] : false;
+            $player_stats['economy_ban'] = isset($bans_info['EconomyBan']) ? $bans_info['EconomyBan'] : 'none';
+            $player_stats['game_ban_count'] = isset($bans_info['NumberOfGameBans']) ? $bans_info['NumberOfGameBans'] : 0;
+        } else {
+            // Set default values if player data not found in response
+            $player_stats['vac_banned'] = false;
+            $player_stats['vac_ban_count'] = 0;
+            $player_stats['days_since_last_ban'] = 0;
+            $player_stats['community_banned'] = false;
+            $player_stats['economy_ban'] = 'none';
+            $player_stats['game_ban_count'] = 0;
+        }
+    } else {
+        $error_message = is_wp_error($bans_response) ? $bans_response->get_error_message() : __('Unknown error when contacting Steam API', STEAM_API_TEXT_DOMAIN);
         return array('error' => __('Error while requesting Steam API:', STEAM_API_TEXT_DOMAIN) . ' ' . $error_message);
     }
 

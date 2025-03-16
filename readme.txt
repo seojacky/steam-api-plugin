@@ -3,7 +3,7 @@ Contributors: develabr
 Tags: steam, api, steamid, profile, gaming
 Requires at least: 4.7
 Tested up to: 6.4
-Stable tag: 1.2
+Stable tag: 1.4
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -78,6 +78,11 @@ The plugin will display a notification to administrators to configure the API ke
 3. Settings page
 
 == Changelog ==
+= 1.4 =
+* Added display of last login time
+* Added VAC ban status information
+* Added trade ban status information
+* Improved error handling for API responses
 
 = 1.3 - 10.03.25 =
 * Added full translation support with __() and _e() functions

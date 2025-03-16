@@ -2,7 +2,7 @@
 /*
 Plugin Name: Steam API Plugin
 Description: Plugin adds opportunity to check Steam ID info on your web-pages.
-Version: 1.3
+Version: 1.4
 Author: develabr, seo_jacky
 Author URI: https://t.me/big_jacky
 Plugin URI: https://github.com/seojacky/steam-api-plugin
@@ -27,6 +27,7 @@ add_action('plugins_loaded', 'steam_api_load_textdomain');
 require_once(plugin_dir_path(__FILE__) . 'ajax/ajax-handler.php');
 // Connecting the file with the user input processing function
 require_once(plugin_dir_path(__FILE__) . 'inc/input-processing.php');
+require_once(plugin_dir_path(__FILE__) . 'settings-page.php');
 
 // Plugin activation hook to set default settings
 register_activation_hook(__FILE__, 'steam_api_activate');
@@ -40,99 +41,7 @@ function steam_api_activate() {
     }
 }
 
-// Add plugin settings page
-add_action('admin_menu', 'steam_api_add_admin_menu');
-function steam_api_add_admin_menu() {
-    add_options_page(
-        __('Steam API Settings', STEAM_API_TEXT_DOMAIN),
-        __('Steam API', STEAM_API_TEXT_DOMAIN),
-        'manage_options',
-        'steam_api_settings',
-        'steam_api_settings_page'
-    );
-}
 
-// Register settings
-add_action('admin_init', 'steam_api_register_settings');
-function steam_api_register_settings() {
-    register_setting('steam_api_settings_group', 'steam_api_settings', 'steam_api_sanitize_settings');
-}
-
-// Sanitize settings
-function steam_api_sanitize_settings($input) {
-    $sanitized_input = array();
-    
-    if (isset($input['api_key'])) {
-        $sanitized_input['api_key'] = sanitize_text_field($input['api_key']);
-        
-        // Validate API key format
-        if (!empty($sanitized_input['api_key'])) {
-            if (strlen($sanitized_input['api_key']) < 32) {
-                add_settings_error(
-                    'steam_api_settings',
-                    'invalid_api_key',
-                    __('The Steam API key appears to be invalid. Please check it and try again.', STEAM_API_TEXT_DOMAIN),
-                    'error'
-                );
-            }
-        }
-    }
-    
-    if (isset($input['cache_duration'])) {
-        $sanitized_input['cache_duration'] = absint($input['cache_duration']);
-    }
-    
-    return $sanitized_input;
-}
-
-// Settings page
-function steam_api_settings_page() {
-    $settings = get_option('steam_api_settings');
-    ?>
-    <div class="wrap">
-        <h1><?php echo esc_html(get_admin_page_title()); ?></h1>
-        <form method="post" action="options.php">
-            <?php settings_fields('steam_api_settings_group'); ?>
-            <table class="form-table">
-                <tr>
-                    <th scope="row">
-                        <label for="steam_api_settings[api_key]"><?php _e('Steam API Key', STEAM_API_TEXT_DOMAIN); ?></label>
-                    </th>
-                    <td>
-                        <input type="text" 
-                               id="steam_api_settings[api_key]" 
-                               name="steam_api_settings[api_key]" 
-                               value="<?php echo esc_attr($settings['api_key']); ?>" 
-                               class="regular-text" />
-                        <p class="description">
-                            <?php _e('Enter your Steam API key. You can get one from', STEAM_API_TEXT_DOMAIN); ?> 
-                            <a href="https://steamcommunity.com/dev/apikey" target="_blank">
-                                <?php _e('Steam Web API Key Registration', STEAM_API_TEXT_DOMAIN); ?>
-                            </a>
-                        </p>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">
-                        <label for="steam_api_settings[cache_duration]"><?php _e('Cache Duration (seconds)', STEAM_API_TEXT_DOMAIN); ?></label>
-                    </th>
-                    <td>
-                        <input type="number" 
-                               id="steam_api_settings[cache_duration]" 
-                               name="steam_api_settings[cache_duration]" 
-                               value="<?php echo esc_attr($settings['cache_duration']); ?>" 
-                               class="regular-text" />
-                        <p class="description">
-                            <?php _e('Duration to cache API results in seconds. Default is 3600 (1 hour).', STEAM_API_TEXT_DOMAIN); ?>
-                        </p>
-                    </td>
-                </tr>
-            </table>
-            <?php submit_button(); ?>
-        </form>
-    </div>
-    <?php
-}
 
 // Admin notice if API key is not configured
 function steam_api_admin_notice() {
@@ -187,45 +96,53 @@ function steam_api_enqueue_scripts() {
     }
 
     $localized_data = array(
-        'ajax_url' => admin_url('admin-ajax.php'),
-        'i18n' => array(
-            'offline' => __('🔴 Offline', STEAM_API_TEXT_DOMAIN),
-            'online' => __('🟢 Online', STEAM_API_TEXT_DOMAIN),
-            'busy' => __('Busy', STEAM_API_TEXT_DOMAIN),
-            'away' => __('Away', STEAM_API_TEXT_DOMAIN),
-            'snooze' => __('Snooze', STEAM_API_TEXT_DOMAIN),
-            'lookingToTrade' => __('Looking to trade', STEAM_API_TEXT_DOMAIN),
-            'lookingToPlay' => __('Looking to play', STEAM_API_TEXT_DOMAIN),
-            'unknown' => __('Unknown', STEAM_API_TEXT_DOMAIN),
-            'private' => __('Private', STEAM_API_TEXT_DOMAIN),
-            'public' => __('Public', STEAM_API_TEXT_DOMAIN),
-            'level' => __('Level', STEAM_API_TEXT_DOMAIN),
-            'copyButton' => __('Copy', STEAM_API_TEXT_DOMAIN),
-            'copyButtonDone' => __('Done', STEAM_API_TEXT_DOMAIN),
-            'steamID2' => __('SteamID2', STEAM_API_TEXT_DOMAIN),
-            'steamID3' => __('SteamID3', STEAM_API_TEXT_DOMAIN),
-            'steamID64' => __('SteamID64', STEAM_API_TEXT_DOMAIN),
-            'realName' => __('Real Name', STEAM_API_TEXT_DOMAIN),
-            'hidden' => __('Hidden', STEAM_API_TEXT_DOMAIN),
-            'profileURL' => __('Profile URL', STEAM_API_TEXT_DOMAIN),
-            'accountCreated' => __('Account created', STEAM_API_TEXT_DOMAIN),
-            'visibility' => __('Visibility', STEAM_API_TEXT_DOMAIN),
-            'status' => __('Status', STEAM_API_TEXT_DOMAIN),
-            'location' => __('Location', STEAM_API_TEXT_DOMAIN),
-            'avatar' => __('Avatar', STEAM_API_TEXT_DOMAIN),
-            'errorFetchingData' => __('Error fetching player data.', STEAM_API_TEXT_DOMAIN),
-            'playerNotFound' => __('Player data not found.', STEAM_API_TEXT_DOMAIN),
-            'find' => __('Find', STEAM_API_TEXT_DOMAIN),
-            'enterDetails' => __('Enter SteamID / SteamCommunityID / Profile Name / Profile URL', STEAM_API_TEXT_DOMAIN),
-            'findSteamId' => __('Find and get your Steam ID, Steam ID 64, customURL and community ID', STEAM_API_TEXT_DOMAIN),
-            'examples' => __('For example:
+    'ajax_url' => admin_url('admin-ajax.php'),
+    'i18n' => array(
+        'offline' => __('🔴 Offline', STEAM_API_TEXT_DOMAIN),
+        'online' => __('🟢 Online', STEAM_API_TEXT_DOMAIN),
+        'busy' => __('Busy', STEAM_API_TEXT_DOMAIN),
+        'away' => __('Away', STEAM_API_TEXT_DOMAIN),
+        'snooze' => __('Snooze', STEAM_API_TEXT_DOMAIN),
+        'lookingToTrade' => __('Looking to trade', STEAM_API_TEXT_DOMAIN),
+        'lookingToPlay' => __('Looking to play', STEAM_API_TEXT_DOMAIN),
+        'unknown' => __('Unknown', STEAM_API_TEXT_DOMAIN),
+        'private' => __('Private', STEAM_API_TEXT_DOMAIN),
+        'public' => __('Public', STEAM_API_TEXT_DOMAIN),
+        'level' => __('Level', STEAM_API_TEXT_DOMAIN),
+        'copyButton' => __('Copy', STEAM_API_TEXT_DOMAIN),
+        'copyButtonDone' => __('Done', STEAM_API_TEXT_DOMAIN),
+        'steamID2' => __('SteamID2', STEAM_API_TEXT_DOMAIN),
+        'steamID3' => __('SteamID3', STEAM_API_TEXT_DOMAIN),
+        'steamID64' => __('SteamID64', STEAM_API_TEXT_DOMAIN),
+        'realName' => __('Real Name', STEAM_API_TEXT_DOMAIN),
+        'hidden' => __('Hidden', STEAM_API_TEXT_DOMAIN),
+        'profileURL' => __('Profile URL', STEAM_API_TEXT_DOMAIN),
+        'accountCreated' => __('Account created', STEAM_API_TEXT_DOMAIN),
+        'visibility' => __('Visibility', STEAM_API_TEXT_DOMAIN),
+        'status' => __('Status', STEAM_API_TEXT_DOMAIN),
+        'location' => __('Location', STEAM_API_TEXT_DOMAIN),
+        'avatar' => __('Avatar', STEAM_API_TEXT_DOMAIN),
+        'errorFetchingData' => __('Error fetching player data.', STEAM_API_TEXT_DOMAIN),
+        'playerNotFound' => __('Player data not found.', STEAM_API_TEXT_DOMAIN),
+        'find' => __('Find', STEAM_API_TEXT_DOMAIN),
+        'enterDetails' => __('Enter SteamID / SteamCommunityID / Profile Name / Profile URL', STEAM_API_TEXT_DOMAIN),
+        'findSteamId' => __('Find and get your Steam ID, Steam ID 64, customURL and community ID', STEAM_API_TEXT_DOMAIN),
+        'examples' => __('For example:
 Heavenanvil
 76561198036370701
 STEAM_0:1:38052486
 steamcommunity.com/id/heavenanvil
-steamcommunity.com/profiles/76561198036370701', STEAM_API_TEXT_DOMAIN)
-        )
-    );
+steamcommunity.com/profiles/76561198036370701', STEAM_API_TEXT_DOMAIN),
+        'lastLogin' => __('Last Login', STEAM_API_TEXT_DOMAIN),
+        'vacBanStatus' => __('VAC Ban Status', STEAM_API_TEXT_DOMAIN),
+        'tradeBanStatus' => __('Trade Ban Status', STEAM_API_TEXT_DOMAIN),
+        'yes' => __('Yes', STEAM_API_TEXT_DOMAIN),
+        'no' => __('No', STEAM_API_TEXT_DOMAIN),
+        'bans' => __('bans', STEAM_API_TEXT_DOMAIN),
+        'daysSinceLastBan' => __('days since last ban', STEAM_API_TEXT_DOMAIN),
+        'permanentBan' => __('Permanent Ban', STEAM_API_TEXT_DOMAIN)
+    )
+);
     wp_localize_script('steam-api-scripts', 'steamApiData', $localized_data);
 }
 add_action('wp_enqueue_scripts', 'steam_api_enqueue_scripts');
