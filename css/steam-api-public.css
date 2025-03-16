@@ -246,3 +246,12 @@ hr {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
+.vac-banned {
+    color: #ff4545;
+    font-weight: bold;
+}
+
+.trade-banned {
+    color: #ff7700;
+    font-weight: bold;
+}

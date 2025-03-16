@@ -18,6 +18,25 @@ export const displayPlayerInfo = (data) => {
   const steamId3 = getSteamId3(steamId2);
   const visibility = getVisibility(data.communityvisibilitystate);
   const status = getStatus(data.personastate);
+  
+  // Форматирование времени последнего входа
+  const lastLogoff = data.last_logoff 
+      ? new Date(data.last_logoff * 1000).toLocaleString() 
+      : i18n.unknown;
+  
+  // Форматирование статуса VAC-бана
+  const vacBanStatus = data.vac_banned 
+      ? `${i18n.yes} (${data.vac_ban_count} ${i18n.bans}, ${data.days_since_last_ban} ${i18n.daysSinceLastBan})` 
+      : i18n.no;
+  
+  // Форматирование статуса торговых ограничений
+  let economyBanStatus = i18n.no;
+  if (data.economy_ban && data.economy_ban !== 'none') {
+      economyBanStatus = data.economy_ban === 'banned' 
+          ? i18n.permanentBan 
+          : data.economy_ban;
+  }
+  
   userInfo.innerHTML = `
 	<div class="card-body">
         <div class="text-center">
@@ -26,10 +45,10 @@ export const displayPlayerInfo = (data) => {
             height="75"
             class="user-avatar"
             loading="lazy"
-						alt="${i18n.avatar} ${data.nickname}"
+			alt="${i18n.avatar} ${data.nickname}"
             src="${data.avatar}"
           />
-					<div class="lvl-wrap"><span>${i18n.level}</span> ${
+			<div class="lvl-wrap"><span>${i18n.level}</span> ${
             data.playerlevel
               ? `<div class="player-level"><span>${data.playerlevel}</span></div>`
               : 'N/A'
@@ -44,7 +63,7 @@ export const displayPlayerInfo = (data) => {
           <dd>
             <!--SteamID2 Value -->
             <span class="steamId2">${steamId2}</span>
-						<button class="button-copy">${i18n.copyButton}</button>
+			<button class="button-copy">${i18n.copyButton}</button>
           </dd>
           <!---->
           <!--SteamID3 -->
@@ -52,7 +71,7 @@ export const displayPlayerInfo = (data) => {
           <dd>
             <!--SteamID3 Value -->
             <span class="steamId3">${steamId3}</span>
-						<button class="button-copy">${i18n.copyButton}</button>
+			<button class="button-copy">${i18n.copyButton}</button>
           </dd>
           <!---->
           <!--SteamID64 -->
@@ -60,7 +79,7 @@ export const displayPlayerInfo = (data) => {
           <dd>
             <!--SteamID64 Value -->
             <span class="steamId64">${data.steamid}</span>
-						<button class="button-copy">${i18n.copyButton}</button>
+			<button class="button-copy">${i18n.copyButton}</button>
           </dd>
           <!---->
 
@@ -78,11 +97,23 @@ export const displayPlayerInfo = (data) => {
           <!----><!----><!----><!---->
           <dt>${i18n.status}</dt>
           <dd>${status}</dd>
-					<!----><!----><!----><!---->
+          <!----><!----><!----><!---->
           <dt>${i18n.location}</dt>
           <dd><span class="profile-location">${location ? location : 'N/A'}${
     location ? `</span> <span class="profile-flag">${flagIcon}</span>` : ''
   }</dd>
+          
+          <!-- Last Login -->
+          <dt>${i18n.lastLogin}</dt>
+          <dd>${lastLogoff}</dd>
+          
+          <!-- VAC Ban Status -->
+          <dt>${i18n.vacBanStatus}</dt>
+          <dd class="${data.vac_banned ? 'vac-banned' : ''}">${vacBanStatus}</dd>
+          
+          <!-- Trade Ban Status -->
+          <dt>${i18n.tradeBanStatus}</dt>
+          <dd class="${economyBanStatus !== i18n.no ? 'trade-banned' : ''}">${economyBanStatus}</dd>
         </dl>
   </div>
 		`;
