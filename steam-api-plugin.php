@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Steam API Plugin
+Plugin Name: Steam Stats Checker
 Description: Plugin adds opportunity to check Steam ID info on your web-pages.
 Version: 1.4
 Author: develabr, seo_jacky
@@ -11,18 +11,20 @@ Text Domain: steam-api-plugin
 Domain Path: /languages
 */
 
-// Define text domain constant
-define('STEAM_API_TEXT_DOMAIN', 'steam-api-plugin');
+// Prohibition of direct access to the file
+if (!defined('ABSPATH')) {
+    exit;
+}
 
 // Load plugin text domain
 function steam_api_load_textdomain() {
     load_plugin_textdomain(
-        STEAM_API_TEXT_DOMAIN,
+        'steam-api-plugin',
         false,
         dirname(plugin_basename(__FILE__)) . '/languages/'
     );
 }
-add_action('plugins_loaded', 'steam_api_load_textdomain');
+add_action('init', 'steam_api_load_textdomain');
 
 require_once(plugin_dir_path(__FILE__) . 'ajax/ajax-handler.php');
 // Connecting the file with the user input processing function
@@ -41,19 +43,18 @@ function steam_api_activate() {
     }
 }
 
-
-
-// Admin notice if API key is not configured
+// Admin notice if API key is not configured - Option 2: Using esc_html functions
 function steam_api_admin_notice() {
     $settings = get_option('steam_api_settings');
     if (empty($settings['api_key']) && current_user_can('manage_options')) {
         ?>
         <div class="notice notice-error is-dismissible">
-            <p><?php printf(
-                __('Steam API Plugin requires a Steam API key to function. Please %sconfigure it now%s.', STEAM_API_TEXT_DOMAIN),
-                '<a href="options-general.php?page=steam_api_settings">',
-                '</a>'
-            ); ?></p>
+            <p>
+                <?php esc_html_e('Steam API Plugin requires a Steam API key to function.', 'steam-api-plugin'); ?>
+                <a href="<?php echo esc_url(admin_url('options-general.php?page=steam_api_settings')); ?>">
+                    <?php esc_html_e('Configure it now', 'steam-api-plugin'); ?>
+                </a>
+            </p>
         </div>
         <?php
     }
@@ -98,49 +99,49 @@ function steam_api_enqueue_scripts() {
     $localized_data = array(
     'ajax_url' => admin_url('admin-ajax.php'),
     'i18n' => array(
-        'offline' => __('🔴 Offline', STEAM_API_TEXT_DOMAIN),
-        'online' => __('🟢 Online', STEAM_API_TEXT_DOMAIN),
-        'busy' => __('Busy', STEAM_API_TEXT_DOMAIN),
-        'away' => __('Away', STEAM_API_TEXT_DOMAIN),
-        'snooze' => __('Snooze', STEAM_API_TEXT_DOMAIN),
-        'lookingToTrade' => __('Looking to trade', STEAM_API_TEXT_DOMAIN),
-        'lookingToPlay' => __('Looking to play', STEAM_API_TEXT_DOMAIN),
-        'unknown' => __('Unknown', STEAM_API_TEXT_DOMAIN),
-        'private' => __('Private', STEAM_API_TEXT_DOMAIN),
-        'public' => __('Public', STEAM_API_TEXT_DOMAIN),
-        'level' => __('Level', STEAM_API_TEXT_DOMAIN),
-        'copyButton' => __('Copy', STEAM_API_TEXT_DOMAIN),
-        'copyButtonDone' => __('Done', STEAM_API_TEXT_DOMAIN),
-        'steamID2' => __('SteamID2', STEAM_API_TEXT_DOMAIN),
-        'steamID3' => __('SteamID3', STEAM_API_TEXT_DOMAIN),
-        'steamID64' => __('SteamID64', STEAM_API_TEXT_DOMAIN),
-        'realName' => __('Real Name', STEAM_API_TEXT_DOMAIN),
-        'hidden' => __('Hidden', STEAM_API_TEXT_DOMAIN),
-        'profileURL' => __('Profile URL', STEAM_API_TEXT_DOMAIN),
-        'accountCreated' => __('Account created', STEAM_API_TEXT_DOMAIN),
-        'visibility' => __('Visibility', STEAM_API_TEXT_DOMAIN),
-        'status' => __('Status', STEAM_API_TEXT_DOMAIN),
-        'location' => __('Location', STEAM_API_TEXT_DOMAIN),
-        'avatar' => __('Avatar', STEAM_API_TEXT_DOMAIN),
-        'errorFetchingData' => __('Error fetching player data.', STEAM_API_TEXT_DOMAIN),
-        'playerNotFound' => __('Player data not found.', STEAM_API_TEXT_DOMAIN),
-        'find' => __('Find', STEAM_API_TEXT_DOMAIN),
-        'enterDetails' => __('Enter SteamID / SteamCommunityID / Profile Name / Profile URL', STEAM_API_TEXT_DOMAIN),
-        'findSteamId' => __('Find and get your Steam ID, Steam ID 64, customURL and community ID', STEAM_API_TEXT_DOMAIN),
+        'offline' => __('🔴 Offline', 'steam-api-plugin'),
+        'online' => __('🟢 Online', 'steam-api-plugin'),
+        'busy' => __('Busy', 'steam-api-plugin'),
+        'away' => __('Away', 'steam-api-plugin'),
+        'snooze' => __('Snooze', 'steam-api-plugin'),
+        'lookingToTrade' => __('Looking to trade', 'steam-api-plugin'),
+        'lookingToPlay' => __('Looking to play', 'steam-api-plugin'),
+        'unknown' => __('Unknown', 'steam-api-plugin'),
+        'private' => __('Private', 'steam-api-plugin'),
+        'public' => __('Public', 'steam-api-plugin'),
+        'level' => __('Level', 'steam-api-plugin'),
+        'copyButton' => __('Copy', 'steam-api-plugin'),
+        'copyButtonDone' => __('Done', 'steam-api-plugin'),
+        'steamID2' => __('SteamID2', 'steam-api-plugin'),
+        'steamID3' => __('SteamID3', 'steam-api-plugin'),
+        'steamID64' => __('SteamID64', 'steam-api-plugin'),
+        'realName' => __('Real Name', 'steam-api-plugin'),
+        'hidden' => __('Hidden', 'steam-api-plugin'),
+        'profileURL' => __('Profile URL', 'steam-api-plugin'),
+        'accountCreated' => __('Account created', 'steam-api-plugin'),
+        'visibility' => __('Visibility', 'steam-api-plugin'),
+        'status' => __('Status', 'steam-api-plugin'),
+        'location' => __('Location', 'steam-api-plugin'),
+        'avatar' => __('Avatar', 'steam-api-plugin'),
+        'errorFetchingData' => __('Error fetching player data.', 'steam-api-plugin'),
+        'playerNotFound' => __('Player data not found.', 'steam-api-plugin'),
+        'find' => __('Find', 'steam-api-plugin'),
+        'enterDetails' => __('Enter SteamID / SteamCommunityID / Profile Name / Profile URL', 'steam-api-plugin'),
+        'findSteamId' => __('Find and get your Steam ID, Steam ID 64, customURL and community ID', 'steam-api-plugin'),
         'examples' => __('For example:
 Heavenanvil
 76561198036370701
 STEAM_0:1:38052486
 steamcommunity.com/id/heavenanvil
-steamcommunity.com/profiles/76561198036370701', STEAM_API_TEXT_DOMAIN),
-        'lastLogin' => __('Last Login', STEAM_API_TEXT_DOMAIN),
-        'vacBanStatus' => __('VAC Ban Status', STEAM_API_TEXT_DOMAIN),
-        'tradeBanStatus' => __('Trade Ban Status', STEAM_API_TEXT_DOMAIN),
-        'yes' => __('Yes', STEAM_API_TEXT_DOMAIN),
-        'no' => __('No', STEAM_API_TEXT_DOMAIN),
-        'bans' => __('bans', STEAM_API_TEXT_DOMAIN),
-        'daysSinceLastBan' => __('days since last ban', STEAM_API_TEXT_DOMAIN),
-        'permanentBan' => __('Permanent Ban', STEAM_API_TEXT_DOMAIN)
+steamcommunity.com/profiles/76561198036370701', 'steam-api-plugin'),
+        'lastLogin' => __('Last Login', 'steam-api-plugin'),
+        'vacBanStatus' => __('VAC Ban Status', 'steam-api-plugin'),
+        'tradeBanStatus' => __('Trade Ban Status', 'steam-api-plugin'),
+        'yes' => __('Yes', 'steam-api-plugin'),
+        'no' => __('No', 'steam-api-plugin'),
+        'bans' => __('bans', 'steam-api-plugin'),
+        'daysSinceLastBan' => __('days since last ban', 'steam-api-plugin'),
+        'permanentBan' => __('Permanent Ban', 'steam-api-plugin')
     )
 );
     wp_localize_script('steam-api-scripts', 'steamApiData', $localized_data);
@@ -172,12 +173,12 @@ function steam_api_shortcode() {
     if (!$api_key) {
         if (current_user_can('manage_options')) {
             return '<div class="steam-api-wrapper"><div class="steam-api-error">' . 
-                   sprintf(__('Steam API key is not configured. %sConfigure it now%s.', STEAM_API_TEXT_DOMAIN), 
+                   sprintf(__('Steam API key is not configured. %sConfigure it now%s.', 'steam-api-plugin'), 
                    '<a href="' . admin_url('options-general.php?page=steam_api_settings') . '">', '</a>') . 
                    '</div></div>';
         } else {
             return '<div class="steam-api-wrapper"><div class="steam-api-error">' . 
-                   __('This feature is currently unavailable. Please contact the site administrator.', STEAM_API_TEXT_DOMAIN) . 
+                   __('This feature is currently unavailable. Please contact the site administrator.', 'steam-api-plugin') . 
                    '</div></div>';
         }
     }
@@ -196,7 +197,7 @@ function get_player_stats_callback() {
         // Check if API key is configured
         $api_key = steam_api_get_api_key();
         if (!$api_key) {
-            wp_send_json(array('error' => __('Steam API key is not configured. Please contact the site administrator.', STEAM_API_TEXT_DOMAIN)));
+            wp_send_json(array('error' => __('Steam API key is not configured. Please contact the site administrator.', 'steam-api-plugin')));
             wp_die();
         }
         
@@ -224,7 +225,7 @@ function get_player_stats_callback() {
                 wp_send_json($player_stats);
             }
         } else {
-            wp_send_json(array('error' => __('Could not find Steam profile. Please check your input and try again.', STEAM_API_TEXT_DOMAIN)));
+            wp_send_json(array('error' => __('Could not find Steam profile. Please check your input and try again.', 'steam-api-plugin')));
             wp_die();
         }
     }

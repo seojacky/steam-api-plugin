@@ -7,6 +7,11 @@ import { getFlagEmoji } from './flagEmoji.js';
 import i18n from './i18n.js';
 
 export const displayPlayerInfo = (data) => {
+	console.log('Player data received:', data);
+  	console.log('Last logoff data:', data.last_logoff);
+  	console.log('VAC ban data:', data.vac_banned);
+  	console.log('Economy ban data:', data.economy_ban);
+	
   const userInfo = document.getElementById('user-info');
   const location = getLocation(
     data.loccountrycode,

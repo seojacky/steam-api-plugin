@@ -10,7 +10,7 @@ function fetch_steam_player_stats($steamId) {
     
     // Check if API key is available
     if (!$api_key) {
-        return array('error' => __('Steam API key is not configured.', STEAM_API_TEXT_DOMAIN));
+        return array('error' => __('Steam API key is not configured.', 'steam-api-plugin'));
     }
 
     // Array to store player statistics
@@ -39,11 +39,11 @@ function fetch_steam_player_stats($steamId) {
             // Add last login time information
             $player_stats['last_logoff'] = isset($player_info['lastlogoff']) ? $player_info['lastlogoff'] : null;
         } else {
-            return array('error' => __('Player profile not found.', STEAM_API_TEXT_DOMAIN));
+            return array('error' => __('Player profile not found.', 'steam-api-plugin'));
         }
     } else {
-        $error_message = is_wp_error($profile_response) ? $profile_response->get_error_message() : __('Unknown error when contacting Steam API', STEAM_API_TEXT_DOMAIN);
-        return array('error' => __('Error while requesting Steam API:', STEAM_API_TEXT_DOMAIN) . ' ' . $error_message);
+        $error_message = is_wp_error($profile_response) ? $profile_response->get_error_message() : __('Unknown error when contacting Steam API', 'steam-api-plugin');
+        return array('error' => __('Error while requesting Steam API:', 'steam-api-plugin') . ' ' . $error_message);
     }
 
     // Get player's level using WordPress HTTP API
@@ -58,8 +58,8 @@ function fetch_steam_player_stats($steamId) {
             $player_stats['playerlevel'] = "";
         }
     } else {
-        $error_message = is_wp_error($level_response) ? $level_response->get_error_message() : __('Unknown error when contacting Steam API', STEAM_API_TEXT_DOMAIN);
-        return array('error' => __('Error while requesting Steam API:', STEAM_API_TEXT_DOMAIN) . ' ' . $error_message);
+        $error_message = is_wp_error($level_response) ? $level_response->get_error_message() : __('Unknown error when contacting Steam API', 'steam-api-plugin');
+        return array('error' => __('Error while requesting Steam API:', 'steam-api-plugin') . ' ' . $error_message);
     }
     
     // Get player ban information
@@ -86,8 +86,8 @@ function fetch_steam_player_stats($steamId) {
             $player_stats['game_ban_count'] = 0;
         }
     } else {
-        $error_message = is_wp_error($bans_response) ? $bans_response->get_error_message() : __('Unknown error when contacting Steam API', STEAM_API_TEXT_DOMAIN);
-        return array('error' => __('Error while requesting Steam API:', STEAM_API_TEXT_DOMAIN) . ' ' . $error_message);
+        $error_message = is_wp_error($bans_response) ? $bans_response->get_error_message() : __('Unknown error when contacting Steam API', 'steam-api-plugin');
+        return array('error' => __('Error while requesting Steam API:', 'steam-api-plugin') . ' ' . $error_message);
     }
 
     return $player_stats;

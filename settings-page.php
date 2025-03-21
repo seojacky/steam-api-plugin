@@ -4,8 +4,8 @@
 add_action('admin_menu', 'steam_api_add_admin_menu');
 function steam_api_add_admin_menu() {
     add_options_page(
-        __('Steam API Settings', STEAM_API_TEXT_DOMAIN),
-        __('Steam API', STEAM_API_TEXT_DOMAIN),
+        __('Steam API Settings', 'steam-api-plugin'),
+        __('Steam API', 'steam-api-plugin'),
         'manage_options',
         'steam_api_settings',
         'steam_api_settings_page'
@@ -31,7 +31,7 @@ function steam_api_sanitize_settings($input) {
                 add_settings_error(
                     'steam_api_settings',
                     'invalid_api_key',
-                    __('The Steam API key appears to be invalid. Please check it and try again.', STEAM_API_TEXT_DOMAIN),
+                    __('The Steam API key appears to be invalid. Please check it and try again.', 'steam-api-plugin'),
                     'error'
                 );
             }
@@ -56,7 +56,7 @@ function steam_api_settings_page() {
             <table class="form-table">
                 <tr>
                     <th scope="row">
-                        <label for="steam_api_settings[api_key]"><?php _e('Steam API Key', STEAM_API_TEXT_DOMAIN); ?></label>
+                        <label for="steam_api_settings[api_key]"><?php _e('Steam API Key', 'steam-api-plugin'); ?></label>
                     </th>
                     <td>
                         <input type="text" 
@@ -65,16 +65,16 @@ function steam_api_settings_page() {
                                value="<?php echo esc_attr($settings['api_key']); ?>" 
                                class="regular-text" />
                         <p class="description">
-                            <?php _e('Enter your Steam API key. You can get one from', STEAM_API_TEXT_DOMAIN); ?> 
+                            <?php _e('Enter your Steam API key. You can get one from', 'steam-api-plugin'); ?> 
                             <a href="https://steamcommunity.com/dev/apikey" target="_blank">
-                                <?php _e('Steam Web API Key Registration', STEAM_API_TEXT_DOMAIN); ?>
+                                <?php _e('Steam Web API Key Registration', 'steam-api-plugin'); ?>
                             </a>
                         </p>
                     </td>
                 </tr>
                 <tr>
                     <th scope="row">
-                        <label for="steam_api_settings[cache_duration]"><?php _e('Cache Duration (seconds)', STEAM_API_TEXT_DOMAIN); ?></label>
+                        <label for="steam_api_settings[cache_duration]"><?php _e('Cache Duration (seconds)', 'steam-api-plugin'); ?></label>
                     </th>
                     <td>
                         <input type="number" 
@@ -83,7 +83,7 @@ function steam_api_settings_page() {
                                value="<?php echo esc_attr($settings['cache_duration']); ?>" 
                                class="regular-text" />
                         <p class="description">
-                            <?php _e('Duration to cache API results in seconds. Default is 3600 (1 hour).', STEAM_API_TEXT_DOMAIN); ?>
+                            <?php _e('Duration to cache API results in seconds. Default is 3600 (1 hour).', 'steam-api-plugin'); ?>
                         </p>
                     </td>
                 </tr>

@@ -1,0 +1,296 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-09 22:35+0000\n"
+"PO-Revision-Date: 2025-03-21 07:14+0000\n"
+"Last-Translator: \n"
+"Language-Team: Russian\n"
+"Language: ru_RU\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && "
+"n%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.7.1; wp-6.7.2"
+
+#: steam-api-plugin.php:121
+msgid "Account created"
+msgstr "Аккаунт создан"
+
+#: steam-api-plugin.php:125
+msgid "Avatar"
+msgstr "Аватар"
+
+#: steam-api-plugin.php:105
+msgid "Away"
+msgstr "Прочь"
+
+#: steam-api-plugin.php:142
+msgid "bans"
+msgstr "баны"
+
+#: steam-api-plugin.php:104
+msgid "Busy"
+msgstr "Занят"
+
+#: settings-page.php:77
+msgid "Cache Duration (seconds)"
+msgstr "Длительность кэша (секунды)"
+
+#: steam-api-plugin.php:55
+msgid "Configure it now"
+msgstr "Настройте сейчас"
+
+#: steam-api-plugin.php:113
+msgid "Copy"
+msgstr "Копировать"
+
+#: steam-api-plugin.php:228 inc/enhanced-api-functions.php:228
+msgid "Could not find Steam profile. Please check your input and try again."
+msgstr ""
+"Не удалось найти профиль Steam. Пожалуйста, проверьте введенные вами данные "
+"и попробуйте снова."
+
+#: steam-api-plugin.php:143
+msgid "days since last ban"
+msgstr "дней с момента последнего запрета"
+
+#. Author of the plugin
+msgid "develabr, seo_jacky"
+msgstr ""
+
+#: steam-api-plugin.php:114
+msgid "Done"
+msgstr "Выполнено"
+
+#: settings-page.php:86
+msgid "Duration to cache API results in seconds. Default is 3600 (1 hour)."
+msgstr ""
+"Длительность кэширования результатов API в секундах. По умолчанию - 3600 (1 "
+"час)."
+
+#: steam-api-plugin.php:129 templates/form-template.php:18
+#: templates/enhanced-form-template.php:18
+msgid "Enter SteamID / SteamCommunityID / Profile Name / Profile URL"
+msgstr "Введите SteamID / SteamCommunityID / Имя профиля / URL профиля"
+
+#: settings-page.php:68
+msgid "Enter your Steam API key. You can get one from"
+msgstr "Введите свой API-ключ Steam. Вы можете получить его на"
+
+#: steam-api-plugin.php:126
+msgid "Error fetching player data."
+msgstr "Ошибка при извлечении данных плеера."
+
+#: ajax/ajax-handler.php:46 ajax/ajax-handler.php:62 ajax/ajax-handler.php:90
+msgid "Error while requesting Steam API:"
+msgstr "Ошибка при запросе Steam API:"
+
+#: steam-api-plugin.php:128 templates/form-template.php:20
+#: templates/enhanced-form-template.php:20
+msgid "Find"
+msgstr "Найти"
+
+#: steam-api-plugin.php:130 templates/form-template.php:22
+msgid "Find and get your Steam ID, Steam ID 64, customURL and community ID"
+msgstr ""
+"Найдите и получите свой Steam ID, Steam ID 64, customURL и community ID"
+
+#: templates/enhanced-form-template.php:22
+msgid ""
+"Find and get your Steam ID, Steam ID 64, customURL and community ID, along "
+"with extended profile information"
+msgstr ""
+"Найдите и получите свой Steam ID, Steam ID 64, customURL и идентификатор "
+"сообщества, а также расширенную информацию профиля."
+
+#: steam-api-plugin.php:131 templates/form-template.php:12
+#: templates/enhanced-form-template.php:12
+msgid ""
+"For example:\n"
+"Heavenanvil\n"
+"76561198036370701\n"
+"STEAM_0:1:38052486\n"
+"steamcommunity.com/id/heavenanvil\n"
+"steamcommunity.com/profiles/76561198036370701"
+msgstr ""
+"For example:\n"
+"Heavenanvil\n"
+"76561198036370701\n"
+"STEAM_0:1:38052486\n"
+"steamcommunity.com/id/heavenanvil\n"
+"steamcommunity.com/profiles/76561198036370701"
+
+#: steam-api-plugin.php:119
+msgid "Hidden"
+msgstr "Скрытый"
+
+#. URI of the plugin
+msgid "https://github.com/seojacky/steam-api-plugin"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://t.me/big_jacky"
+msgstr ""
+
+#: steam-api-plugin.php:137
+msgid "Last Login"
+msgstr "Последний вход"
+
+#: steam-api-plugin.php:112
+msgid "Level"
+msgstr "Уровень"
+
+#: steam-api-plugin.php:124
+msgid "Location"
+msgstr "Расположение"
+
+#: steam-api-plugin.php:108
+msgid "Looking to play"
+msgstr "Ищу игру"
+
+#: steam-api-plugin.php:107
+msgid "Looking to trade"
+msgstr "Ищу торговлю"
+
+#: steam-api-plugin.php:141
+msgid "No"
+msgstr "Нет"
+
+#: steam-api-plugin.php:144
+msgid "Permanent Ban"
+msgstr "Постоянный запрет"
+
+#: steam-api-plugin.php:127
+msgid "Player data not found."
+msgstr "Данные игрока не найдены."
+
+#: ajax/ajax-handler.php:42
+msgid "Player profile not found."
+msgstr "Профиль игрока не найден."
+
+#. Description of the plugin
+msgid "Plugin adds opportunity to check Steam ID info on your web-pages."
+msgstr ""
+"Плагин добавляет возможность проверки информации Steam ID на ваших веб-"
+"страницах."
+
+#: steam-api-plugin.php:110
+msgid "Private"
+msgstr "Частный"
+
+#: steam-api-plugin.php:120
+msgid "Profile URL"
+msgstr "URL-адрес профиля"
+
+#: steam-api-plugin.php:111
+msgid "Public"
+msgstr "Публичный"
+
+#: steam-api-plugin.php:118
+msgid "Real Name"
+msgstr "Настоящее Имя"
+
+#: steam-api-plugin.php:106
+msgid "Snooze"
+msgstr "Повтор"
+
+#: steam-api-plugin.php:123
+msgid "Status"
+msgstr "Статус"
+
+#: settings-page.php:8
+msgid "Steam API"
+msgstr "Steam API"
+
+#: settings-page.php:59
+msgid "Steam API Key"
+msgstr "Ключ API Steam"
+
+#: inc/enhanced-api-functions.php:13 ajax/ajax-handler.php:13
+msgid "Steam API key is not configured."
+msgstr "Ключ Steam API не настроен."
+
+#: steam-api-plugin.php:176
+#, php-format
+msgid "Steam API key is not configured. %sConfigure it now%s."
+msgstr "Ключ API Steam не настроен. %sConfigure это сейчас%s."
+
+#: steam-api-plugin.php:200 inc/enhanced-api-functions.php:200
+msgid "Steam API key is not configured. Please contact the site administrator."
+msgstr "Steam API key не настроен. Обратитесь к администратору сайта."
+
+#. Name of the plugin
+msgid "Steam API Plugin"
+msgstr "Плагин API Steam"
+
+#: steam-api-plugin.php:53
+msgid "Steam API Plugin requires a Steam API key to function."
+msgstr "Для работы плагина Steam API требуется ключ Steam API."
+
+#: settings-page.php:7
+msgid "Steam API Settings"
+msgstr "Настройки Steam API"
+
+#: settings-page.php:70
+msgid "Steam Web API Key Registration"
+msgstr "Регистрация Ключа Steam Web API"
+
+#: steam-api-plugin.php:115
+msgid "SteamID2"
+msgstr "SteamID2"
+
+#: steam-api-plugin.php:116
+msgid "SteamID3"
+msgstr "SteamID3"
+
+#: steam-api-plugin.php:117
+msgid "SteamID64"
+msgstr "SteamID64"
+
+#: settings-page.php:34
+msgid "The Steam API key appears to be invalid. Please check it and try again."
+msgstr ""
+"Ключ API Steam, похоже, недействителен. Пожалуйста, проверьте это и "
+"попробуйте снова."
+
+#: steam-api-plugin.php:181
+msgid ""
+"This feature is currently unavailable. Please contact the site administrator."
+msgstr ""
+"Эта функция в настоящее время недоступна. Пожалуйста, свяжитесь с "
+"администратором сайта."
+
+#: steam-api-plugin.php:139
+msgid "Trade Ban Status"
+msgstr "Статус запрета торговли"
+
+#: steam-api-plugin.php:109
+msgid "Unknown"
+msgstr "Неизвестный"
+
+#: ajax/ajax-handler.php:45 ajax/ajax-handler.php:61 ajax/ajax-handler.php:89
+msgid "Unknown error when contacting Steam API"
+msgstr "Неизвестная ошибка при обращении к Steam API"
+
+#: steam-api-plugin.php:138
+msgid "VAC Ban Status"
+msgstr "Статус запрета VAC"
+
+#: steam-api-plugin.php:122
+msgid "Visibility"
+msgstr "Видимость"
+
+#: steam-api-plugin.php:140
+msgid "Yes"
+msgstr "Да"
+
+#: steam-api-plugin.php:102
+msgid "🔴 Offline"
+msgstr "🔴 Offline"
+
+#: steam-api-plugin.php:103
+msgid "🟢 Online"
+msgstr "🟢 Online"
