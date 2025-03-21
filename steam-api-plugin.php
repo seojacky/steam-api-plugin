@@ -2,7 +2,7 @@
 /*
 Plugin Name: Steam Stats Checker
 Description: Plugin adds opportunity to check Steam ID info on your web-pages.
-Version: 1.4
+Version: 1.4.1
 Author: develabr, seo_jacky
 Author URI: https://t.me/big_jacky
 Plugin URI: https://github.com/seojacky/steam-api-plugin
