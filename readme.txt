@@ -1,9 +1,9 @@
-=== Steam API Plugin ===
+=== Steam Stats Checker ===
 Contributors: develabr
 Tags: steam, api, steamid, profile, gaming
 Requires at least: 4.7
 Tested up to: 6.4
-Stable tag: 1.4
+Stable tag: 1.2
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -12,7 +12,7 @@ Easily integrate Steam profile information on your WordPress site. Search and di
 
 == Description ==
 
-The Steam API Plugin allows you to embed Steam profile information on your WordPress site. Users can search for Steam profiles using various inputs like SteamID, Steam profile URLs, or custom profile names. The plugin displays detailed information including avatar, level, various Steam IDs, account creation date, and more.
+The Steam Stats Checker allows you to embed Steam profile information on your WordPress site. Users can search for Steam profiles using various inputs like SteamID, Steam profile URLs, or custom profile names. The plugin displays detailed information including avatar, level, various Steam IDs, account creation date, and more.
 
 = Features =
 
@@ -78,11 +78,14 @@ The plugin will display a notification to administrators to configure the API ke
 3. Settings page
 
 == Changelog ==
-= 1.4 =
-* Added display of last login time
-* Added VAC ban status information
-* Added trade ban status information
-* Improved error handling for API responses
+= 1.4.1 - 21.03.25 =
+* Renamed plugin to "Steam Stats Checker" for better description of functionality
+* Improved internationalization by moving text domain loading to the 'init' hook
+* Enhanced compatibility with translation plugins like Loco Translate
+* Fixed translation issues with admin notices and complex strings
+* Added proper escaping for translated texts throughout the plugin
+* Improved code security with ABSPATH check to prevent direct file access
+* Optimized translation string handling in JavaScript
 
 = 1.3 - 10.03.25 =
 * Added full translation support with __() and _e() functions

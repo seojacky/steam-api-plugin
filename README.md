@@ -1,4 +1,4 @@
-# Steam API WordPress Plugin
+# Steam Stats Checker
 
 A WordPress plugin that allows users to check and display Steam profile information using the Steam Web API.
 
