@@ -1,278 +1,278 @@
-#, fuzzy
-msgid ""
-msgstr ""
-"Project-Id-Version: Steam API Plugin\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-21 07:14+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: \n"
-"Language: \n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.7.1; wp-6.7.2\n"
-"X-Domain: steam-api-plugin"
-
-#: steam-api-plugin.php:121
-msgid "Account created"
-msgstr ""
-
-#: steam-api-plugin.php:125
-msgid "Avatar"
-msgstr ""
-
-#: steam-api-plugin.php:105
-msgid "Away"
-msgstr ""
-
-#: steam-api-plugin.php:142
-msgid "bans"
-msgstr ""
-
-#: steam-api-plugin.php:104
-msgid "Busy"
-msgstr ""
-
-#: settings-page.php:77
-msgid "Cache Duration (seconds)"
-msgstr ""
-
-#: steam-api-plugin.php:55
-msgid "Configure it now"
-msgstr ""
-
-#: steam-api-plugin.php:113
-msgid "Copy"
-msgstr ""
-
-#: steam-api-plugin.php:228 inc/enhanced-api-functions.php:228
-msgid "Could not find Steam profile. Please check your input and try again."
-msgstr ""
-
-#: steam-api-plugin.php:143
-msgid "days since last ban"
-msgstr ""
-
-#. Author of the plugin
-msgid "develabr, seo_jacky"
-msgstr ""
-
-#: steam-api-plugin.php:114
-msgid "Done"
-msgstr ""
-
-#: settings-page.php:86
-msgid "Duration to cache API results in seconds. Default is 3600 (1 hour)."
-msgstr ""
-
-#: steam-api-plugin.php:129 templates/form-template.php:18
-#: templates/enhanced-form-template.php:18
-msgid "Enter SteamID / SteamCommunityID / Profile Name / Profile URL"
-msgstr ""
-
-#: settings-page.php:68
-msgid "Enter your Steam API key. You can get one from"
-msgstr ""
-
-#: steam-api-plugin.php:126
-msgid "Error fetching player data."
-msgstr ""
-
-#: ajax/ajax-handler.php:46 ajax/ajax-handler.php:62 ajax/ajax-handler.php:90
-msgid "Error while requesting Steam API:"
-msgstr ""
-
-#: steam-api-plugin.php:128 templates/form-template.php:20
-#: templates/enhanced-form-template.php:20
-msgid "Find"
-msgstr ""
-
-#: steam-api-plugin.php:130 templates/form-template.php:22
-msgid "Find and get your Steam ID, Steam ID 64, customURL and community ID"
-msgstr ""
-
-#: templates/enhanced-form-template.php:22
-msgid ""
-"Find and get your Steam ID, Steam ID 64, customURL and community ID, along "
-"with extended profile information"
-msgstr ""
-
-#: steam-api-plugin.php:131 templates/form-template.php:12
-#: templates/enhanced-form-template.php:12
-msgid ""
-"For example:\n"
-"Heavenanvil\n"
-"76561198036370701\n"
-"STEAM_0:1:38052486\n"
-"steamcommunity.com/id/heavenanvil\n"
-"steamcommunity.com/profiles/76561198036370701"
-msgstr ""
-
-#: steam-api-plugin.php:119
-msgid "Hidden"
-msgstr ""
-
-#. URI of the plugin
-msgid "https://github.com/seojacky/steam-api-plugin"
-msgstr ""
-
-#. Author URI of the plugin
-msgid "https://t.me/big_jacky"
-msgstr ""
-
-#: steam-api-plugin.php:137
-msgid "Last Login"
-msgstr ""
-
-#: steam-api-plugin.php:112
-msgid "Level"
-msgstr ""
-
-#: steam-api-plugin.php:124
-msgid "Location"
-msgstr ""
-
-#: steam-api-plugin.php:108
-msgid "Looking to play"
-msgstr ""
-
-#: steam-api-plugin.php:107
-msgid "Looking to trade"
-msgstr ""
-
-#: steam-api-plugin.php:141
-msgid "No"
-msgstr ""
-
-#: steam-api-plugin.php:144
-msgid "Permanent Ban"
-msgstr ""
-
-#: steam-api-plugin.php:127
-msgid "Player data not found."
-msgstr ""
-
-#: ajax/ajax-handler.php:42
-msgid "Player profile not found."
-msgstr ""
-
-#. Description of the plugin
-msgid "Plugin adds opportunity to check Steam ID info on your web-pages."
-msgstr ""
-
-#: steam-api-plugin.php:110
-msgid "Private"
-msgstr ""
-
-#: steam-api-plugin.php:120
-msgid "Profile URL"
-msgstr ""
-
-#: steam-api-plugin.php:111
-msgid "Public"
-msgstr ""
-
-#: steam-api-plugin.php:118
-msgid "Real Name"
-msgstr ""
-
-#: steam-api-plugin.php:106
-msgid "Snooze"
-msgstr ""
-
-#: steam-api-plugin.php:123
-msgid "Status"
-msgstr ""
-
-#: settings-page.php:8
-msgid "Steam API"
-msgstr ""
-
-#: settings-page.php:59
-msgid "Steam API Key"
-msgstr ""
-
-#: inc/enhanced-api-functions.php:13 ajax/ajax-handler.php:13
-msgid "Steam API key is not configured."
-msgstr ""
-
-#: steam-api-plugin.php:176
-#, php-format
-msgid "Steam API key is not configured. %sConfigure it now%s."
-msgstr ""
-
-#: steam-api-plugin.php:200 inc/enhanced-api-functions.php:200
-msgid "Steam API key is not configured. Please contact the site administrator."
-msgstr ""
-
-#: steam-api-plugin.php:53
-msgid "Steam API Plugin requires a Steam API key to function."
-msgstr ""
-
-#: settings-page.php:7
-msgid "Steam API Settings"
-msgstr ""
-
-#. Name of the plugin
-msgid "Steam Check Stats"
-msgstr ""
-
-#: settings-page.php:70
-msgid "Steam Web API Key Registration"
-msgstr ""
-
-#: steam-api-plugin.php:115
-msgid "SteamID2"
-msgstr ""
-
-#: steam-api-plugin.php:116
-msgid "SteamID3"
-msgstr ""
-
-#: steam-api-plugin.php:117
-msgid "SteamID64"
-msgstr ""
-
-#: settings-page.php:34
-msgid "The Steam API key appears to be invalid. Please check it and try again."
-msgstr ""
-
-#: steam-api-plugin.php:181
-msgid ""
-"This feature is currently unavailable. Please contact the site administrator."
-msgstr ""
-
-#: steam-api-plugin.php:139
-msgid "Trade Ban Status"
-msgstr ""
-
-#: steam-api-plugin.php:109
-msgid "Unknown"
-msgstr ""
-
-#: ajax/ajax-handler.php:45 ajax/ajax-handler.php:61 ajax/ajax-handler.php:89
-msgid "Unknown error when contacting Steam API"
-msgstr ""
-
-#: steam-api-plugin.php:138
-msgid "VAC Ban Status"
-msgstr ""
-
-#: steam-api-plugin.php:122
-msgid "Visibility"
-msgstr ""
-
-#: steam-api-plugin.php:140
-msgid "Yes"
-msgstr ""
-
-#: steam-api-plugin.php:102
-msgid "🔴 Offline"
-msgstr ""
-
-#: steam-api-plugin.php:103
-msgid "🟢 Online"
-msgstr ""
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Steam API Plugin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-21 07:14+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: \n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.7.1; wp-6.7.2\n"
+"X-Domain: steam-api-plugin"
+
+#: steam-api-plugin.php:121
+msgid "Account created"
+msgstr ""
+
+#: steam-api-plugin.php:125
+msgid "Avatar"
+msgstr ""
+
+#: steam-api-plugin.php:105
+msgid "Away"
+msgstr ""
+
+#: steam-api-plugin.php:142
+msgid "bans"
+msgstr ""
+
+#: steam-api-plugin.php:104
+msgid "Busy"
+msgstr ""
+
+#: settings-page.php:77
+msgid "Cache Duration (seconds)"
+msgstr ""
+
+#: steam-api-plugin.php:55
+msgid "Configure it now"
+msgstr ""
+
+#: steam-api-plugin.php:113
+msgid "Copy"
+msgstr ""
+
+#: steam-api-plugin.php:228 inc/enhanced-api-functions.php:228
+msgid "Could not find Steam profile. Please check your input and try again."
+msgstr ""
+
+#: steam-api-plugin.php:143
+msgid "days since last ban"
+msgstr ""
+
+#. Author of the plugin
+msgid "develabr, seo_jacky"
+msgstr ""
+
+#: steam-api-plugin.php:114
+msgid "Done"
+msgstr ""
+
+#: settings-page.php:86
+msgid "Duration to cache API results in seconds. Default is 3600 (1 hour)."
+msgstr ""
+
+#: steam-api-plugin.php:129 templates/form-template.php:18
+#: templates/enhanced-form-template.php:18
+msgid "Enter SteamID / SteamCommunityID / Profile Name / Profile URL"
+msgstr ""
+
+#: settings-page.php:68
+msgid "Enter your Steam API key. You can get one from"
+msgstr ""
+
+#: steam-api-plugin.php:126
+msgid "Error fetching player data."
+msgstr ""
+
+#: ajax/ajax-handler.php:46 ajax/ajax-handler.php:62 ajax/ajax-handler.php:90
+msgid "Error while requesting Steam API:"
+msgstr ""
+
+#: steam-api-plugin.php:128 templates/form-template.php:20
+#: templates/enhanced-form-template.php:20
+msgid "Find"
+msgstr ""
+
+#: steam-api-plugin.php:130 templates/form-template.php:22
+msgid "Find and get your Steam ID, Steam ID 64, customURL and community ID"
+msgstr ""
+
+#: templates/enhanced-form-template.php:22
+msgid ""
+"Find and get your Steam ID, Steam ID 64, customURL and community ID, along "
+"with extended profile information"
+msgstr ""
+
+#: steam-api-plugin.php:131 templates/form-template.php:12
+#: templates/enhanced-form-template.php:12
+msgid ""
+"For example:\n"
+"Heavenanvil\n"
+"76561198036370701\n"
+"STEAM_0:1:38052486\n"
+"steamcommunity.com/id/heavenanvil\n"
+"steamcommunity.com/profiles/76561198036370701"
+msgstr ""
+
+#: steam-api-plugin.php:119
+msgid "Hidden"
+msgstr ""
+
+#. URI of the plugin
+msgid "https://github.com/seojacky/steam-api-plugin"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://t.me/big_jacky"
+msgstr ""
+
+#: steam-api-plugin.php:137
+msgid "Last Login"
+msgstr ""
+
+#: steam-api-plugin.php:112
+msgid "Level"
+msgstr ""
+
+#: steam-api-plugin.php:124
+msgid "Location"
+msgstr ""
+
+#: steam-api-plugin.php:108
+msgid "Looking to play"
+msgstr ""
+
+#: steam-api-plugin.php:107
+msgid "Looking to trade"
+msgstr ""
+
+#: steam-api-plugin.php:141
+msgid "No"
+msgstr ""
+
+#: steam-api-plugin.php:144
+msgid "Permanent Ban"
+msgstr ""
+
+#: steam-api-plugin.php:127
+msgid "Player data not found."
+msgstr ""
+
+#: ajax/ajax-handler.php:42
+msgid "Player profile not found."
+msgstr ""
+
+#. Description of the plugin
+msgid "Plugin adds opportunity to check Steam ID info on your web-pages."
+msgstr ""
+
+#: steam-api-plugin.php:110
+msgid "Private"
+msgstr ""
+
+#: steam-api-plugin.php:120
+msgid "Profile URL"
+msgstr ""
+
+#: steam-api-plugin.php:111
+msgid "Public"
+msgstr ""
+
+#: steam-api-plugin.php:118
+msgid "Real Name"
+msgstr ""
+
+#: steam-api-plugin.php:106
+msgid "Snooze"
+msgstr ""
+
+#: steam-api-plugin.php:123
+msgid "Status"
+msgstr ""
+
+#: settings-page.php:8
+msgid "Steam API"
+msgstr ""
+
+#: settings-page.php:59
+msgid "Steam API Key"
+msgstr ""
+
+#: inc/enhanced-api-functions.php:13 ajax/ajax-handler.php:13
+msgid "Steam API key is not configured."
+msgstr ""
+
+#: steam-api-plugin.php:176
+#, php-format
+msgid "Steam API key is not configured. %sConfigure it now%s."
+msgstr ""
+
+#: steam-api-plugin.php:200 inc/enhanced-api-functions.php:200
+msgid "Steam API key is not configured. Please contact the site administrator."
+msgstr ""
+
+#: steam-api-plugin.php:53
+msgid "Steam API Plugin requires a Steam API key to function."
+msgstr ""
+
+#: settings-page.php:7
+msgid "Steam API Settings"
+msgstr ""
+
+#. Name of the plugin
+msgid "Steam Check Stats"
+msgstr ""
+
+#: settings-page.php:70
+msgid "Steam Web API Key Registration"
+msgstr ""
+
+#: steam-api-plugin.php:115
+msgid "SteamID2"
+msgstr ""
+
+#: steam-api-plugin.php:116
+msgid "SteamID3"
+msgstr ""
+
+#: steam-api-plugin.php:117
+msgid "SteamID64"
+msgstr ""
+
+#: settings-page.php:34
+msgid "The Steam API key appears to be invalid. Please check it and try again."
+msgstr ""
+
+#: steam-api-plugin.php:181
+msgid ""
+"This feature is currently unavailable. Please contact the site administrator."
+msgstr ""
+
+#: steam-api-plugin.php:139
+msgid "Trade Ban Status"
+msgstr ""
+
+#: steam-api-plugin.php:109
+msgid "Unknown"
+msgstr ""
+
+#: ajax/ajax-handler.php:45 ajax/ajax-handler.php:61 ajax/ajax-handler.php:89
+msgid "Unknown error when contacting Steam API"
+msgstr ""
+
+#: steam-api-plugin.php:138
+msgid "VAC Ban Status"
+msgstr ""
+
+#: steam-api-plugin.php:122
+msgid "Visibility"
+msgstr ""
+
+#: steam-api-plugin.php:140
+msgid "Yes"
+msgstr ""
+
+#: steam-api-plugin.php:102
+msgid "🔴 Offline"
+msgstr ""
+
+#: steam-api-plugin.php:103
+msgid "🟢 Online"
+msgstr ""

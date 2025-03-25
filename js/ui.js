@@ -55,7 +55,7 @@ export const displayPlayerInfo = (data) => {
           />
 			<div class="lvl-wrap"><span>${i18n.level}</span> ${
             data.playerlevel
-              ? `<div class="player-level"><span>${data.playerlevel}</span></div>`
+              ? `<div class="player-level" style="--text-length: ${data.playerlevel.toString().length}"><span>${data.playerlevel}</span></div>`
               : 'N/A'
           } </div>
           <!--Nickname -->
