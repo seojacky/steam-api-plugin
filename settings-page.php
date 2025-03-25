@@ -4,8 +4,8 @@
 add_action('admin_menu', 'steam_api_add_admin_menu');
 function steam_api_add_admin_menu() {
     add_options_page(
-        __('Steam API Settings', 'steam-api-plugin'),
-        __('Steam API', 'steam-api-plugin'),
+        __('Steam Player Stats', 'steam-api-plugin'),
+        __('Steam Player Stats', 'steam-api-plugin'),
         'manage_options',
         'steam_api_settings',
         'steam_api_settings_page'

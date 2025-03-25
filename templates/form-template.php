@@ -19,9 +19,15 @@ steamcommunity.com/profiles/76561198036370701', 'steam-api-plugin'); ?>"
                     style="border-top-left-radius: .25rem;border-bottom-left-radius: .25rem;">
                 <button type="button" id="get-stats-button"><?php echo esc_html__('Find', 'steam-api-plugin'); ?></button>
             </div>
-            <p class="form-description"><?php echo esc_html__('Find and get your Steam ID, Steam ID 64, customURL and community ID', 'steam-api-plugin'); ?></p>
+            <p class="form-description"><?php echo esc_html__('Find and get your Steam ID, Steam ID 64, customURL and community ID, along with extended profile information', 'steam-api-plugin'); ?></p>
         </form>
     </div>
+    
+    <!-- Loading indicator -->
+    <div id="loading-indicator" class="loading-indicator hidden">
+        <div class="loader"></div>
+    </div>
+    
     <div id="user-info" class="user-info-block"></div>
     <div id="results"></div>
 </div>
