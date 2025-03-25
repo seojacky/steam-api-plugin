@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-03-09 22:35+0000\n"
-"PO-Revision-Date: 2025-03-25 12:14+0000\n"
+"PO-Revision-Date: 2025-03-25 21:35+0000\n"
 "Last-Translator: \n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
@@ -15,31 +15,31 @@ msgstr ""
 "X-Generator: Loco https://localise.biz/\n"
 "X-Loco-Version: 2.7.1; wp-6.7.2"
 
-#: steam-api-plugin.php:166
+#: steam-api-plugin.php:192
 msgid "Accessible"
 msgstr "Доступный"
 
-#: steam-api-plugin.php:121
+#: steam-api-plugin.php:147
 msgid "Account created"
 msgstr "Аккаунт создан"
 
-#: steam-api-plugin.php:151
+#: steam-api-plugin.php:177
 msgid "Achievement Progress"
 msgstr "Прогресс достижений"
 
-#: steam-api-plugin.php:125
+#: steam-api-plugin.php:151
 msgid "Avatar"
 msgstr "Аватар"
 
-#: steam-api-plugin.php:105
+#: steam-api-plugin.php:131
 msgid "Away"
 msgstr "Отошёл"
 
-#: steam-api-plugin.php:142
+#: steam-api-plugin.php:168
 msgid "bans"
 msgstr "баны"
 
-#: steam-api-plugin.php:104
+#: steam-api-plugin.php:130
 msgid "Busy"
 msgstr "Занят"
 
@@ -47,21 +47,21 @@ msgstr "Занят"
 msgid "Cache Duration (seconds)"
 msgstr "Длительность кэша (секунды)"
 
-#: steam-api-plugin.php:55
+#: steam-api-plugin.php:81
 msgid "Configure it now"
 msgstr "Настройте сейчас"
 
-#: steam-api-plugin.php:113
+#: steam-api-plugin.php:139
 msgid "Copy"
 msgstr "Копировать"
 
-#: steam-api-plugin.php:253
+#: steam-api-plugin.php:282
 msgid "Could not find Steam profile. Please check your input and try again."
 msgstr ""
 "Не удалось найти профиль Steam. Пожалуйста, проверьте введенные вами данные "
 "и попробуйте снова."
 
-#: steam-api-plugin.php:143 steam-api-plugin.php:158
+#: steam-api-plugin.php:169 steam-api-plugin.php:184
 msgid "days since last ban"
 msgstr "дней с момента последнего запрета"
 
@@ -69,7 +69,7 @@ msgstr "дней с момента последнего запрета"
 msgid "develabr, seo_jacky"
 msgstr "develabr, seo_jacky"
 
-#: steam-api-plugin.php:114
+#: steam-api-plugin.php:140
 msgid "Done"
 msgstr "Выполнено"
 
@@ -79,7 +79,7 @@ msgstr ""
 "Длительность кэширования результатов API в секундах. По умолчанию - 3600 (1 "
 "час)."
 
-#: steam-api-plugin.php:129 templates/form-template.php:18
+#: steam-api-plugin.php:155 templates/form-template.php:18
 msgid "Enter SteamID / SteamCommunityID / Profile Name / Profile URL"
 msgstr "Введите SteamID / SteamCommunityID / Имя профиля / URL профиля"
 
@@ -87,7 +87,7 @@ msgstr "Введите SteamID / SteamCommunityID / Имя профиля / URL 
 msgid "Enter your Steam API key. You can get one from"
 msgstr "Введите свой API-ключ Steam. Вы можете получить его на"
 
-#: steam-api-plugin.php:126
+#: steam-api-plugin.php:152
 msgid "Error fetching player data."
 msgstr "Ошибка при извлечении данных плеера."
 
@@ -95,15 +95,15 @@ msgstr "Ошибка при извлечении данных плеера."
 msgid "Error while requesting Steam API:"
 msgstr "Ошибка при запросе Steam API:"
 
-#: steam-api-plugin.php:146
+#: steam-api-plugin.php:172
 msgid "Extended Information"
 msgstr "Расширенная информация"
 
-#: steam-api-plugin.php:128 templates/form-template.php:20
+#: steam-api-plugin.php:154 templates/form-template.php:20
 msgid "Find"
 msgstr "Найти"
 
-#: steam-api-plugin.php:130
+#: steam-api-plugin.php:156
 msgid "Find and get your Steam ID, Steam ID 64, customURL and community ID"
 msgstr ""
 "Найдите и получите свой Steam ID, Steam ID 64, customURL и community ID"
@@ -116,7 +116,7 @@ msgstr ""
 "Найдите и получите свой Steam ID, Steam ID 64, customURL и идентификатор "
 "сообщества, а также расширенную информацию профиля."
 
-#: steam-api-plugin.php:131 templates/form-template.php:12
+#: steam-api-plugin.php:157 templates/form-template.php:12
 msgid ""
 "For example:\n"
 "Heavenanvil\n"
@@ -132,19 +132,19 @@ msgstr ""
 "steamcommunity.com/id/heavenanvil\n"
 "steamcommunity.com/profiles/76561198036370701"
 
-#: steam-api-plugin.php:149
+#: steam-api-plugin.php:175
 msgid "Friends Count"
 msgstr "Количество друзей"
 
-#: steam-api-plugin.php:147
+#: steam-api-plugin.php:173
 msgid "Games Count"
 msgstr "Количество игр"
 
-#: steam-api-plugin.php:119
+#: steam-api-plugin.php:145
 msgid "Hidden"
 msgstr "Скрытый"
 
-#: steam-api-plugin.php:154
+#: steam-api-plugin.php:180
 msgid "hours"
 msgstr "часов"
 
@@ -156,59 +156,67 @@ msgstr "https://github.com/seojacky/steam-api-plugin"
 msgid "https://t.me/big_jacky"
 msgstr "https://t.me/big_jacky"
 
-#: steam-api-plugin.php:168
+#: steam-api-plugin.php:194
 msgid "Inventory Status"
 msgstr "Статус инвентаря"
 
-#: steam-api-plugin.php:137
+#: steam-api-plugin.php:163
 msgid "Last Login"
 msgstr "Последний вход"
 
-#: steam-api-plugin.php:112
+#: steam-api-plugin.php:138
 msgid "Level"
 msgstr "Уровень"
 
-#: steam-api-plugin.php:124
+#: steam-api-plugin.php:150
 msgid "Location"
 msgstr "Расположение"
 
-#: steam-api-plugin.php:108
+#: steam-api-plugin.php:134
 msgid "Looking to play"
 msgstr "Ищу игру"
 
-#: steam-api-plugin.php:107
+#: steam-api-plugin.php:133
 msgid "Looking to trade"
 msgstr "Ищу торговлю"
 
-#: steam-api-plugin.php:155
+#: steam-api-plugin.php:181
 msgid "minutes"
 msgstr "минут"
 
-#: steam-api-plugin.php:141
+#: steam-api-plugin.php:167
 msgid "No"
 msgstr "Нет"
 
-#: steam-api-plugin.php:161
+#: steam-api-plugin.php:196
+msgid "No Data"
+msgstr "Нет данных"
+
+#: steam-api-plugin.php:198
+msgid "No popular games"
+msgstr "Нет популярных игр"
+
+#: steam-api-plugin.php:187
 msgid "No recently played games"
 msgstr "Нет недавно сыгранных игр"
 
-#: steam-api-plugin.php:159
+#: steam-api-plugin.php:185
 msgid "No Trade Bans"
 msgstr "Нет торговых запретов"
 
-#: steam-api-plugin.php:157
+#: steam-api-plugin.php:183
 msgid "No VAC Bans"
 msgstr "Нет запретов VAC"
 
-#: steam-api-plugin.php:167
+#: steam-api-plugin.php:193
 msgid "Not accessible"
 msgstr "Недоступный"
 
-#: steam-api-plugin.php:144
+#: steam-api-plugin.php:170
 msgid "Permanent Ban"
 msgstr "Постоянный запрет"
 
-#: steam-api-plugin.php:127
+#: steam-api-plugin.php:153
 msgid "Player data not found."
 msgstr "Данные игрока не найдены."
 
@@ -216,7 +224,7 @@ msgstr "Данные игрока не найдены."
 msgid "Player profile not found."
 msgstr "Профиль игрока не найден."
 
-#: steam-api-plugin.php:169
+#: steam-api-plugin.php:195
 msgid "Please enter a Steam ID"
 msgstr "Пожалуйста, введите Steam ID"
 
@@ -226,39 +234,39 @@ msgstr ""
 "Плагин добавляет возможность проверки информации Steam ID на ваших веб-"
 "страницах."
 
-#: steam-api-plugin.php:110
+#: steam-api-plugin.php:136
 msgid "Private"
 msgstr "Частный"
 
-#: steam-api-plugin.php:165
+#: steam-api-plugin.php:191
 msgid "Private profile"
 msgstr "Личный профиль"
 
-#: steam-api-plugin.php:120
+#: steam-api-plugin.php:146
 msgid "Profile URL"
 msgstr "URL-адрес профиля"
 
-#: steam-api-plugin.php:111
+#: steam-api-plugin.php:137
 msgid "Public"
 msgstr "Публичный"
 
-#: steam-api-plugin.php:118
+#: steam-api-plugin.php:144
 msgid "Real Name"
 msgstr "Настоящее Имя"
 
-#: steam-api-plugin.php:162
+#: steam-api-plugin.php:188
 msgid "Recent Playtime"
-msgstr "Недавнее время игры"
+msgstr "Недавнее время в игре"
 
-#: steam-api-plugin.php:152
+#: steam-api-plugin.php:178
 msgid "Recently Played Games"
 msgstr "Недавно сыгранные игры"
 
-#: steam-api-plugin.php:106
+#: steam-api-plugin.php:132
 msgid "Snooze"
 msgstr "Повтор"
 
-#: steam-api-plugin.php:123
+#: steam-api-plugin.php:149
 msgid "Status"
 msgstr "Статус"
 
@@ -270,16 +278,16 @@ msgstr "Ключ API Steam"
 msgid "Steam API key is not configured."
 msgstr "Ключ Steam API не настроен."
 
-#: steam-api-plugin.php:201
+#: steam-api-plugin.php:230
 #, php-format
 msgid "Steam API key is not configured. %sConfigure it now%s."
 msgstr "Ключ API Steam не настроен. %sConfigure это сейчас%s."
 
-#: steam-api-plugin.php:225
+#: steam-api-plugin.php:254
 msgid "Steam API key is not configured. Please contact the site administrator."
 msgstr "Steam API key не настроен. Обратитесь к администратору сайта."
 
-#: steam-api-plugin.php:53
+#: steam-api-plugin.php:79
 msgid "Steam API Plugin requires a Steam API key to function."
 msgstr "Для работы плагина Steam API требуется ключ Steam API."
 
@@ -295,15 +303,15 @@ msgstr "Проверка статистики Steam"
 msgid "Steam Web API Key Registration"
 msgstr "Регистрация Ключа Steam Web API"
 
-#: steam-api-plugin.php:115
+#: steam-api-plugin.php:141
 msgid "SteamID2"
 msgstr "SteamID2"
 
-#: steam-api-plugin.php:116
+#: steam-api-plugin.php:142
 msgid "SteamID3"
 msgstr "SteamID3"
 
-#: steam-api-plugin.php:117
+#: steam-api-plugin.php:143
 msgid "SteamID64"
 msgstr "SteamID64"
 
@@ -313,26 +321,30 @@ msgstr ""
 "Ключ API Steam, похоже, недействителен. Пожалуйста, проверьте это и "
 "попробуйте снова."
 
-#: steam-api-plugin.php:206
+#: steam-api-plugin.php:235
 msgid ""
 "This feature is currently unavailable. Please contact the site administrator."
 msgstr ""
 "Эта функция в настоящее время недоступна. Пожалуйста, свяжитесь с "
 "администратором сайта."
 
-#: steam-api-plugin.php:148
-msgid "Total Playtime"
-msgstr "Общее время в играх"
+#: steam-api-plugin.php:197
+msgid "Top played games"
+msgstr "Топ сыгранных игр"
 
-#: steam-api-plugin.php:139
+#: steam-api-plugin.php:174
+msgid "Total Playtime"
+msgstr "Общее время в игре"
+
+#: steam-api-plugin.php:165
 msgid "Trade Ban Status"
 msgstr "Статус запрета торговли"
 
-#: steam-api-plugin.php:160
+#: steam-api-plugin.php:186
 msgid "Trade Banned"
 msgstr "Торговля запрещена"
 
-#: steam-api-plugin.php:109
+#: steam-api-plugin.php:135
 msgid "Unknown"
 msgstr "Неизвестный"
 
@@ -340,42 +352,42 @@ msgstr "Неизвестный"
 msgid "Unknown error when contacting Steam API"
 msgstr "Неизвестная ошибка при обращении к Steam API"
 
-#: steam-api-plugin.php:138
+#: steam-api-plugin.php:164
 msgid "VAC Ban Status"
 msgstr "Статус запрета VAC"
 
-#: steam-api-plugin.php:156
+#: steam-api-plugin.php:182
 msgid "VAC Banned"
 msgstr "Заблокирован VAC"
 
-#: steam-api-plugin.php:122
+#: steam-api-plugin.php:148
 msgid "Visibility"
 msgstr "Видимость"
 
-#: steam-api-plugin.php:153
+#: steam-api-plugin.php:179
 msgid "Wishlist"
 msgstr "Список пожеланий"
 
-#: steam-api-plugin.php:150
+#: steam-api-plugin.php:176
 msgid "Wishlist Count"
 msgstr "Количество пожеланий"
 
-#: steam-api-plugin.php:164
+#: steam-api-plugin.php:190
 msgid "Wishlist is empty"
 msgstr "Список желаний пуст"
 
-#: steam-api-plugin.php:163
+#: steam-api-plugin.php:189
 msgid "Wishlist is private"
 msgstr "Список пожеланий является приватным"
 
-#: steam-api-plugin.php:140
+#: steam-api-plugin.php:166
 msgid "Yes"
 msgstr "Да"
 
-#: steam-api-plugin.php:102
+#: steam-api-plugin.php:128
 msgid "🔴 Offline"
 msgstr "🔴 Offline"
 
-#: steam-api-plugin.php:103
+#: steam-api-plugin.php:129
 msgid "🟢 Online"
 msgstr "🟢 Online"

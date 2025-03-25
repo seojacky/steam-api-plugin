@@ -3,7 +3,7 @@ Contributors: develabr
 Tags: steam, api, steamid, profile, gaming
 Requires at least: 4.7
 Tested up to: 6.4
-Stable tag: 1.2
+Stable tag: 1.5.1
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -77,10 +77,33 @@ The plugin will display a notification to administrators to configure the API ke
 2. Profile information display
 3. Settings page
 
-== Changelog === 1.5 - 21.03.25 =* Обновлены функции статистики Steam профиля с расширенными возможностями* Добавлено отображение полной статистики по играм, включая недавно запущенные* Добавлено отображение статистики по времени игры и общему количеству игр* Добавлено отображение списка желаемого из Steam* Добавлено отображение информации о достижениях и статусе инвентаря* Добавлено визуальное отображение статуса VAC и торговых банов* Улучшен пользовательский интерфейс с цветовыми индикаторами статусов* Добавлен индикатор загрузки при ожидании данных с API* Объединены обычная и расширенная версии плагина
-= 1.5 - 21.03.25 =
-* Changed visability
+== Changelog === 
+= 1.5.1 - 29.03.25 =
 
+* Added display of top played games by total playtime
+
+* Fixed caching issues where cached data could become outdated
+
+* Added cache clearing mechanism on plugin activation
+
+* Improved API queries to include detailed game information
+
+* Enhanced display of playtime statistics for each game
+
+* Fixed issue with missing game icons by adding fallback images
+
+* Improved sorting of games by playtime statistics
+
+
+
+1.5 - 21.03.25 =
+* Обновлены функции статистики Steam профиля с расширенными возможностями
+* Добавлено отображение полной статистики по играм, включая недавно запущенные
+* Добавлено отображение статистики по времени игры и общему количеству игр
+* Добавлено отображение списка желаемого из Steam* Добавлено отображение информации о достижениях и статусе инвентаря
+* Добавлено визуальное отображение статуса VAC и торговых банов
+* Улучшен пользовательский интерфейс с цветовыми индикаторами статусов* Добавлен индикатор загрузки при ожидании данных с API
+* Объединены обычная и расширенная версии плагина
 
 = 1.4.1 - 21.03.25 =
 * Renamed plugin to "Steam Stats Checker" for better description of functionality
