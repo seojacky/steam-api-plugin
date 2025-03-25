@@ -1,3 +1,4 @@
+/* Steam API styles */
 .steam-api-wrapper {
   margin: 0 auto;
   text-align: center;
@@ -249,12 +250,144 @@ hr {
   /* Уменьшаем размер шрифта в зависимости от длины текста */
   scale: calc(1 - (min(var(--text-length, 1) - 1, 3) * 0.15));
 }
-*,
-::after,
-::before {
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
+
+/* New styles for enhanced information display */
+.section-title {
+  text-align: left;
+  margin: 1.5rem 0 0.75rem;
+  font-size: 18px;
+  font-weight: 600;
+  color: #444;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 8px;
 }
+
+.status-section {
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem 0;
+  padding: 0.5rem;
+  border-radius: 4px;
+  background-color: #f5f5f5;
+}
+
+.ban-info, .trade-info {
+  padding: 0.5rem;
+  flex: 1;
+}
+
+.ban-status, .trade-status {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 3px;
+  font-weight: 500;
+}
+
+.ban-status.banned {
+  background-color: #ffdddd;
+  color: #d32f2f;
+}
+
+.ban-status.clean {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.trade-status.allowed {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.trade-status.banned {
+  background-color: #ffdddd;
+  color: #d32f2f;
+}
+
+.recent-games {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 1rem 0;
+  text-align: left;
+}
+
+.game-item {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  border-radius: 4px;
+  background-color: #f5f5f5;
+}
+
+.game-icon {
+  width: 32px;
+  height: 32px;
+  margin-right: 10px;
+  border-radius: 4px;
+}
+
+.game-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.game-info strong {
+  font-size: 14px;
+}
+
+.game-info span {
+  font-size: 12px;
+  color: #666;
+}
+
+.wishlist-items {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  text-align: left;
+  margin: 1rem 0;
+}
+
+.wishlist-item {
+  padding: 5px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.wishlist-item a {
+  color: #1a73e8;
+  text-decoration: none;
+}
+
+.wishlist-item a:hover {
+  text-decoration: underline;
+}
+
+/* Loading indicator */
+.loading-indicator {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+.loading-indicator.hidden {
+  display: none;
+}
+
+.loader {
+  border: 5px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 5px solid #3498db;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 .vac-banned {
     color: #ff4545;
     font-weight: bold;
@@ -263,4 +396,11 @@ hr {
 .trade-banned {
     color: #ff7700;
     font-weight: bold;
+}
+
+*,
+::after,
+::before {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
 }

@@ -2,7 +2,7 @@
 /*
 Plugin Name: Steam Stats Checker
 Description: Plugin adds opportunity to check Steam ID info on your web-pages.
-Version: 1.4.2
+Version: 1.5
 Author: develabr, seo_jacky
 Author URI: https://t.me/big_jacky
 Plugin URI: https://github.com/seojacky/steam-api-plugin
@@ -31,8 +31,6 @@ require_once(plugin_dir_path(__FILE__) . 'ajax/ajax-handler.php');
 require_once(plugin_dir_path(__FILE__) . 'inc/input-processing.php');
 require_once(plugin_dir_path(__FILE__) . 'settings-page.php');
 
-require_once(plugin_dir_path(__FILE__) . 'inc/enhanced-api-functions.php');
-
 // Plugin activation hook to set default settings
 register_activation_hook(__FILE__, 'steam_api_activate');
 function steam_api_activate() {
@@ -45,7 +43,7 @@ function steam_api_activate() {
     }
 }
 
-// Admin notice if API key is not configured - Option 2: Using esc_html functions
+// Admin notice if API key is not configured
 function steam_api_admin_notice() {
     $settings = get_option('steam_api_settings');
     if (empty($settings['api_key']) && current_user_can('manage_options')) {
@@ -143,7 +141,32 @@ steamcommunity.com/profiles/76561198036370701', 'steam-api-plugin'),
         'no' => __('No', 'steam-api-plugin'),
         'bans' => __('bans', 'steam-api-plugin'),
         'daysSinceLastBan' => __('days since last ban', 'steam-api-plugin'),
-        'permanentBan' => __('Permanent Ban', 'steam-api-plugin')
+        'permanentBan' => __('Permanent Ban', 'steam-api-plugin'),
+        // Additional strings for advanced functionality
+        'extendedInfo' => __('Extended Information', 'steam-api-plugin'),
+        'gamesCount' => __('Games Count', 'steam-api-plugin'),
+        'totalPlaytime' => __('Total Playtime', 'steam-api-plugin'),
+        'friendsCount' => __('Friends Count', 'steam-api-plugin'),
+        'wishlistCount' => __('Wishlist Count', 'steam-api-plugin'),
+        'achievementProgress' => __('Achievement Progress', 'steam-api-plugin'),
+        'recentlyPlayed' => __('Recently Played Games', 'steam-api-plugin'),
+        'wishlist' => __('Wishlist', 'steam-api-plugin'),
+        'hours' => __('hours', 'steam-api-plugin'),
+        'minutes' => __('minutes', 'steam-api-plugin'),
+        'vacBanned' => __('VAC Banned', 'steam-api-plugin'),
+        'noVacBans' => __('No VAC Bans', 'steam-api-plugin'),
+        'daysSince' => __('days since last ban', 'steam-api-plugin'),
+        'noTradeBans' => __('No Trade Bans', 'steam-api-plugin'),
+        'tradeBanned' => __('Trade Banned', 'steam-api-plugin'),
+        'noRecentGames' => __('No recently played games', 'steam-api-plugin'),
+        'recentPlaytime' => __('Recent Playtime', 'steam-api-plugin'),
+        'privateWishlist' => __('Wishlist is private', 'steam-api-plugin'),
+        'emptyWishlist' => __('Wishlist is empty', 'steam-api-plugin'),
+        'privateProfile' => __('Private profile', 'steam-api-plugin'),
+        'accessible' => __('Accessible', 'steam-api-plugin'),
+        'notAccessible' => __('Not accessible', 'steam-api-plugin'),
+        'inventoryStatus' => __('Inventory Status', 'steam-api-plugin'),
+        'pleaseEnterSteamID' => __('Please enter a Steam ID', 'steam-api-plugin')
     )
 );
     wp_localize_script('steam-api-scripts', 'steamApiData', $localized_data);
@@ -234,113 +257,3 @@ function get_player_stats_callback() {
 
     wp_die();
 }
-
-
-//ENHANCED STATISTIC
-
-function enhanced_steam_api_shortcode() {
-    // Check if API key is configured
-    $api_key = steam_api_get_api_key();
-    
-    if (!$api_key) {
-        if (current_user_can('manage_options')) {
-            return '<div class="steam-api-wrapper"><div class="steam-api-error">' . 
-                   sprintf(__('Steam API key is not configured. %sConfigure it now%s.', 'steam-api-plugin'), 
-                   '<a href="' . admin_url('options-general.php?page=steam_api_settings') . '">', '</a>') . 
-                   '</div></div>';
-        } else {
-            return '<div class="steam-api-wrapper"><div class="steam-api-error">' . 
-                   __('This feature is currently unavailable. Please contact the site administrator.', 'steam-api-plugin') . 
-                   '</div></div>';
-        }
-    }
-    
-    // Enqueue enhanced styles and scripts
-    wp_enqueue_style('enhanced-steam-api-styles', plugin_dir_url(__FILE__) . 'css/enhanced-steam-api-public.css');
-    wp_enqueue_script('enhanced-steam-api-scripts', plugin_dir_url(__FILE__) . 'js/enhanced-steam-api-public.js', array('jquery'), '1.0', true);
-    
-    // Создаем тот же массив переводов, что используется в основном плагине
-    $localized_data = array(
-        'ajax_url' => admin_url('admin-ajax.php'),
-        'i18n' => array(
-            'offline' => __('🔴 Offline', 'steam-api-plugin'),
-            'online' => __('🟢 Online', 'steam-api-plugin'),
-            'busy' => __('Busy', 'steam-api-plugin'),
-            'away' => __('Away', 'steam-api-plugin'),
-            'snooze' => __('Snooze', 'steam-api-plugin'),
-            'lookingToTrade' => __('Looking to trade', 'steam-api-plugin'),
-            'lookingToPlay' => __('Looking to play', 'steam-api-plugin'),
-            'unknown' => __('Unknown', 'steam-api-plugin'),
-            'private' => __('Private', 'steam-api-plugin'),
-            'public' => __('Public', 'steam-api-plugin'),
-            'level' => __('Level', 'steam-api-plugin'),
-            'copyButton' => __('Copy', 'steam-api-plugin'),
-            'copyButtonDone' => __('Done', 'steam-api-plugin'),
-            'steamID2' => __('SteamID2', 'steam-api-plugin'),
-            'steamID3' => __('SteamID3', 'steam-api-plugin'),
-            'steamID64' => __('SteamID64', 'steam-api-plugin'),
-            'realName' => __('Real Name', 'steam-api-plugin'),
-            'hidden' => __('Hidden', 'steam-api-plugin'),
-            'profileURL' => __('Profile URL', 'steam-api-plugin'),
-            'accountCreated' => __('Account created', 'steam-api-plugin'),
-            'visibility' => __('Visibility', 'steam-api-plugin'),
-            'status' => __('Status', 'steam-api-plugin'),
-            'location' => __('Location', 'steam-api-plugin'),
-            'avatar' => __('Avatar', 'steam-api-plugin'),
-            'errorFetchingData' => __('Error fetching player data.', 'steam-api-plugin'),
-            'playerNotFound' => __('Player data not found.', 'steam-api-plugin'),
-            'find' => __('Find', 'steam-api-plugin'),
-            'enterDetails' => __('Enter SteamID / SteamCommunityID / Profile Name / Profile URL', 'steam-api-plugin'),
-            'findSteamId' => __('Find and get your Steam ID, Steam ID 64, customURL and community ID', 'steam-api-plugin'),
-            'lastLogin' => __('Last Login', 'steam-api-plugin'),
-            'vacBanStatus' => __('VAC Ban Status', 'steam-api-plugin'),
-            'tradeBanStatus' => __('Trade Ban Status', 'steam-api-plugin'),
-            'yes' => __('Yes', 'steam-api-plugin'),
-            'no' => __('No', 'steam-api-plugin'),
-            'bans' => __('bans', 'steam-api-plugin'),
-            'daysSinceLastBan' => __('days since last ban', 'steam-api-plugin'),
-            'permanentBan' => __('Permanent Ban', 'steam-api-plugin'),
-            // Дополнительные строки для расширенной версии
-            'extendedInfo' => __('Extended Information', 'steam-api-plugin'),
-            'gamesCount' => __('Games Count', 'steam-api-plugin'),
-            'totalPlaytime' => __('Total Playtime', 'steam-api-plugin'),
-            'friendsCount' => __('Friends Count', 'steam-api-plugin'),
-            'wishlistCount' => __('Wishlist Count', 'steam-api-plugin'),
-            'achievementProgress' => __('Achievement Progress', 'steam-api-plugin'),
-            'recentlyPlayed' => __('Recently Played Games', 'steam-api-plugin'),
-            'wishlist' => __('Wishlist', 'steam-api-plugin'),
-            'hours' => __('hours', 'steam-api-plugin'),
-            'minutes' => __('minutes', 'steam-api-plugin'),
-            'vacBanned' => __('VAC Banned', 'steam-api-plugin'),
-            'noVacBans' => __('No VAC Bans', 'steam-api-plugin'),
-            'daysSince' => __('days since last ban', 'steam-api-plugin'),
-            'noTradeBans' => __('No Trade Bans', 'steam-api-plugin'),
-            'tradeBanned' => __('Trade Banned', 'steam-api-plugin'),
-            'noRecentGames' => __('No recently played games', 'steam-api-plugin'),
-            'recentPlaytime' => __('Recent Playtime', 'steam-api-plugin'),
-            'totalPlaytime' => __('Total Playtime', 'steam-api-plugin'),
-            'privateWishlist' => __('Wishlist is private', 'steam-api-plugin'),
-            'emptyWishlist' => __('Wishlist is empty', 'steam-api-plugin'),
-            'privateProfile' => __('Private profile', 'steam-api-plugin'),
-            'accessible' => __('Accessible', 'steam-api-plugin'),
-            'notAccessible' => __('Not accessible', 'steam-api-plugin'),
-            'inventoryStatus' => __('Inventory Status', 'steam-api-plugin'),
-            'pleaseEnterSteamID' => __('Please enter a Steam ID', 'steam-api-plugin')
-        )
-    );
-    
-    wp_localize_script('enhanced-steam-api-scripts', 'steamApiData', $localized_data);
-    
-    // Добавляем поддержку модулей для JavaScript
-    add_filter("script_loader_tag", function($tag, $handle, $src) {
-        if ("enhanced-steam-api-scripts" === $handle) {
-            $tag = '<script type="module" src="' . esc_url($src) . '"></script>';
-        }
-        return $tag;
-    }, 10, 3);
-    
-    ob_start();
-    include(plugin_dir_path(__FILE__) . 'templates/enhanced-form-template.php');
-    return ob_get_clean();
-}
-add_shortcode('enhanced_steam_api', 'enhanced_steam_api_shortcode');
