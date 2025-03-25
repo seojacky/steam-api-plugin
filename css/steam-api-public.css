@@ -21,7 +21,7 @@
 
 .steam-api-info {
   margin-bottom: 1rem;
-  padding: 3.5rem 0;
+  padding: 0.5rem 0 1rem;
   background-color: #e2e2e2;
 }
 
@@ -228,17 +228,26 @@ hr {
 }
 
 .player-level {
-  display: grid;
-  place-items: center;
-  width: 30px;
-  height: 30px;
-  border-radius: 10em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 35px;
+  height: 35px;
+  padding: 0 6px;
+  aspect-ratio: 1 / 1; /* Поддерживаем форму круга */
+  border-radius: 50%;
   border: 3px solid purple;
-  /* border-image: linear-gradient(to right, red, orange);
-  border-image-slice: 1; */
   margin: 6px;
   font-weight: 700;
   color: #666;
+  width: auto; /* Автоматическая ширина */
+}
+
+/* Для чисел любой длины */
+.player-level span {
+  font-size: 14px;
+  /* Уменьшаем размер шрифта в зависимости от длины текста */
+  scale: calc(1 - (min(var(--text-length, 1) - 1, 3) * 0.15));
 }
 *,
 ::after,

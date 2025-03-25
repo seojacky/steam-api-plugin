@@ -5,6 +5,7 @@ import { getSteamId2, getSteamId3 } from './steamId2.js';
 import { getFlagEmoji } from './flagEmoji.js';
 import i18n from './i18n.js';
 
+// js/enhanced-ui.js
 export const displayEnhancedPlayerInfo = (data) => {
   const userInfo = document.getElementById('user-info');
   const location = data.loccountrycode ? data.loccountrycode.toLowerCase() : '';
@@ -105,7 +106,7 @@ export const displayEnhancedPlayerInfo = (data) => {
         />
         <div class="lvl-wrap"><span>${i18n.level}</span> ${
           data.playerlevel
-            ? `<div class="player-level"><span>${data.playerlevel}</span></div>`
+            ? `<div class="player-level" style="--text-length: ${data.playerlevel.toString().length}"><span>${data.playerlevel}</span></div>`
             : 'N/A'
         } </div>
         <!--Nickname -->
