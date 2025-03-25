@@ -28,9 +28,10 @@ const i18n = typeof steamApiData !== 'undefined' && steamApiData.i18n ? steamApi
     errorFetchingData: 'Error fetching player data.',
     playerNotFound: 'Player data not found.',
     find: 'Find',
-	noData: 'No Data',
+    noData: 'No Data',
     enterDetails: 'Enter SteamID / SteamCommunityID / Profile Name / Profile URL',
-    findSteamId: 'Find and get your Steam ID, Steam ID 64, customURL and community ID'
+    findSteamId: 'Find and get your Steam ID, Steam ID 64, customURL and community ID',
+    topPlayed: 'Top played games',
+    noTopGames: 'No popular games'
 };
-
 export default i18n;

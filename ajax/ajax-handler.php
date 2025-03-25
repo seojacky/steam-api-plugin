@@ -123,26 +123,70 @@ function fetch_steam_player_stats($steamId) {
             }
         }
         
-        // Fetch owned games count and total playtime
-        $owned_games_url = "https://api.steampowered.com/IPlayerService/GetOwnedGames/v1/?key={$api_key}&steamid={$steamId}&include_appinfo=0&include_played_free_games=1";
-        $owned_games_response = wp_remote_get($owned_games_url);
         
-        if (!is_wp_error($owned_games_response) && wp_remote_retrieve_response_code($owned_games_response) === 200) {
-            $owned_games_data = json_decode(wp_remote_retrieve_body($owned_games_response), true);
-            if (isset($owned_games_data['response']['games'])) {
-                $player_stats['gamesCount'] = count($owned_games_data['response']['games']);
-                
-                // Calculate total playtime across all games
-                $total_playtime = 0;
-                foreach ($owned_games_data['response']['games'] as $game) {
-                    $total_playtime += isset($game['playtime_forever']) ? $game['playtime_forever'] : 0;
-                }
-                $player_stats['totalPlaytime'] = $total_playtime; // In minutes
-            } else {
-                $player_stats['gamesCount'] = 0;
-                $player_stats['totalPlaytime'] = 0;
-            }
+
+
+// Fetch owned games count and total playtime
+$owned_games_url = "https://api.steampowered.com/IPlayerService/GetOwnedGames/v1/?key={$api_key}&steamid={$steamId}&include_appinfo=1&include_played_free_games=1";
+$owned_games_response = wp_remote_get($owned_games_url);
+
+if (!is_wp_error($owned_games_response) && wp_remote_retrieve_response_code($owned_games_response) === 200) {
+    $owned_games_data = json_decode(wp_remote_retrieve_body($owned_games_response), true);
+    if (isset($owned_games_data['response']['games'])) {
+        $player_stats['gamesCount'] = count($owned_games_data['response']['games']);
+        
+        // Calculate total playtime across all games
+        $total_playtime = 0;
+        foreach ($owned_games_data['response']['games'] as $game) {
+            $total_playtime += isset($game['playtime_forever']) ? $game['playtime_forever'] : 0;
         }
+        $player_stats['totalPlaytime'] = $total_playtime; // In minutes
+        
+        // Подготавливаем топ-5 игр с наибольшим временем игры
+        if (isset($owned_games_data['response']['games']) && count($owned_games_data['response']['games']) > 0) {
+            // Копируем массив игр, чтобы не менять оригинальные данные
+            $all_games = $owned_games_data['response']['games'];
+            
+            // Сортируем игры по времени игры (от большего к меньшему)
+            usort($all_games, function($a, $b) {
+                return $b['playtime_forever'] - $a['playtime_forever'];
+            });
+            
+            // Берем только первые 5 игр
+            $top_games = array_slice($all_games, 0, 5);
+            
+            // Проверяем, что игры действительно имеют какое-то время игры
+            $filtered_top_games = array_filter($top_games, function($game) {
+                return isset($game['playtime_forever']) && $game['playtime_forever'] > 0;
+            });
+            
+            // Если есть игры с игровым временем, сохраняем их
+            if (!empty($filtered_top_games)) {
+                $player_stats['topGames'] = array_values($filtered_top_games);
+                $player_stats['topGamesCount'] = count($filtered_top_games);
+            } else {
+                $player_stats['topGames'] = array();
+                $player_stats['topGamesCount'] = 0;
+            }
+        } else {
+            $player_stats['topGames'] = array();
+            $player_stats['topGamesCount'] = 0;
+        }
+    } else {
+        $player_stats['gamesCount'] = 0;
+        $player_stats['totalPlaytime'] = 0;
+        $player_stats['topGames'] = array();
+        $player_stats['topGamesCount'] = 0;
+    }
+} else {
+    $error_message = is_wp_error($owned_games_response) ? $owned_games_response->get_error_message() : "HTTP " . wp_remote_retrieve_response_code($owned_games_response);
+    $player_stats['gamesCount'] = 0;
+    $player_stats['totalPlaytime'] = 0;
+    $player_stats['topGames'] = array();
+    $player_stats['topGamesCount'] = 0;
+}
+
+
         
         // Fetch friend list
         $friends_url = "https://api.steampowered.com/ISteamUser/GetFriendList/v1/?key={$api_key}&steamid={$steamId}&relationship=friend";
@@ -300,6 +344,6 @@ if (isset($owned_games_data['response']['games']) && count($owned_games_data['re
         $player_stats['achievementPercentage'] = 'private';
         $player_stats['inventoryAccessible'] = false;
     }
-
-    return $player_stats;
+	
+	return $player_stats;
 }

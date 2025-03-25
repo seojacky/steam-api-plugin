@@ -76,6 +76,43 @@ export const displayPlayerInfo = (data) => {
     html += '</div>';
     return html;
   };
+	
+	
+	// Format top played games list
+const formatTopGames = () => {
+  if (!data.topGames || data.topGames.length === 0) {
+    return `<p>${i18n.noTopGames || 'Нет популярных игр'}</p>`;
+  }
+  
+  let html = '<div class="recent-games">'; // Используем тот же класс для стилизации
+  data.topGames.forEach(game => {
+    const playtimeTotal = Math.floor(game.playtime_forever / 60 * 10) / 10; // Convert to hours with 1 decimal
+    
+    // Проверяем наличие иконки игры
+    let imageUrl;
+    if (game.img_icon_url) {
+      imageUrl = `https://media.steampowered.com/steamcommunity/public/images/apps/${game.appid}/${game.img_icon_url}.jpg`;
+    } else {
+      // Используем заглушку, если иконка отсутствует
+      imageUrl = 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/apps/753/placeholder.jpg';
+    }
+    
+    html += `
+      <div class="game-item">
+        <img src="${imageUrl}" 
+             alt="${game.name}" class="game-icon" loading="lazy">
+        <div class="game-info">
+          <strong>${game.name}</strong>
+          <span>${i18n.totalPlaytime}: ${playtimeTotal} ${i18n.hours}</span>
+        </div>
+      </div>
+    `;
+  });
+  html += '</div>';
+  return html;
+};
+	
+	
   
   // Format wishlist items
   const formatWishlist = () => {
@@ -216,6 +253,10 @@ export const displayPlayerInfo = (data) => {
       <!-- Recently played games section -->
       <h4 class="section-title">${i18n.recentlyPlayed} (${data.recentGamesCount || 0})</h4>
       ${formatRecentGames()}
+
+      <!-- Top played games section -->
+      <h4 class="section-title">${i18n.topPlayed} (${data.topGamesCount || 0})</h4>
+      ${formatTopGames()}
       
       <!-- Wishlist section -->
       <h4 class="section-title">${i18n.wishlist}</h4>

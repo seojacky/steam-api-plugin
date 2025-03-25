@@ -2,7 +2,7 @@
 /*
 Plugin Name: Steam Stats Checker
 Description: Plugin adds opportunity to check Steam ID info on your web-pages.
-Version: 1.5
+Version: 1.5.1
 Author: develabr, seo_jacky
 Author URI: https://t.me/big_jacky
 Plugin URI: https://github.com/seojacky/steam-api-plugin
@@ -40,6 +40,32 @@ function steam_api_activate() {
             'api_key' => '', // No default API key - must be configured by admin
             'cache_duration' => 3600, // Default cache duration in seconds (1 hour)
         ));
+    }
+	
+	// Очистка кеша при активации
+    steam_api_clear_transient_cache();
+}
+
+
+// Функция для очистки всех транзиентов (кешей), связанных с плагином
+function steam_api_clear_transient_cache() {
+    global $wpdb;
+    
+    // Получаем все транзиенты, начинающиеся с 'steam_api_'
+    $sql = "
+        SELECT option_name 
+        FROM {$wpdb->options} 
+        WHERE option_name LIKE '%_transient_steam_api_%'
+        OR option_name LIKE '%_transient_timeout_steam_api_%'
+    ";
+    
+    $transients = $wpdb->get_results($sql);
+    
+    // Удаляем каждый найденный транзиент
+    foreach ($transients as $transient) {
+        $name = str_replace('_transient_', '', $transient->option_name);
+        $name = str_replace('_transient_timeout_', '', $name);
+        delete_transient($name);
     }
 }
 
@@ -166,7 +192,10 @@ steamcommunity.com/profiles/76561198036370701', 'steam-api-plugin'),
         'accessible' => __('Accessible', 'steam-api-plugin'),
         'notAccessible' => __('Not accessible', 'steam-api-plugin'),
         'inventoryStatus' => __('Inventory Status', 'steam-api-plugin'),
-        'pleaseEnterSteamID' => __('Please enter a Steam ID', 'steam-api-plugin')
+        'pleaseEnterSteamID' => __('Please enter a Steam ID', 'steam-api-plugin'),
+		'noData' => __('No Data', 'steam-api-plugin'),
+		'topPlayed' => __('Top played games', 'steam-api-plugin'),
+		'noTopGames' => __('No popular games', 'steam-api-plugin')
     )
 );
     wp_localize_script('steam-api-scripts', 'steamApiData', $localized_data);
