@@ -2,6 +2,12 @@
 
 A WordPress plugin that allows users to check and display Steam profile information using the Steam Web API.
 
+> **⚠️ Important Caching Notice:** If you're using a caching plugin such as Fastest Cache, you must exclude the following files/paths from caching to ensure proper functionality:
+> - `/wp-content/plugins/steam-api-plugin/js/steam-api-public.js`
+> - `/wp-admin/admin-ajax.php` (especially for POST requests)
+> 
+> Failure to exclude these paths may result in "Security check failed" errors when trying to retrieve player statistics.
+
 ## Features
 
 - Search for Steam profiles using various input formats:
